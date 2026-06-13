@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Landing page ecommerce para ARMON, boutique femenina de prendas elegantes, accesorios y colecciones cápsula."
+    />
+    <title>ARMON | Boutique femenina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="ARMON inicio">
+        <span class="brand-mark">ARMON</span>
+        <span class="brand-copy">
+          <strong>ARMON</strong>
+          <small>Boutique femenina</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#coleccion">Colección</a>
+        <a href="#productos">Productos</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="header-cta" href="#productos">Comprar ahora</a>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-content">
+          <p class="eyebrow">Nueva colección · Primavera-Verano</p>
+          <h1>Moda femenina con presencia, brillo sutil y elegancia diaria.</h1>
+          <p class="hero-copy">
+            Descubre piezas seleccionadas para mujeres que buscan verse sofisticadas sin perder
+            comodidad: vestidos, conjuntos, accesorios y básicos elevados.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#productos">Ver catálogo</a>
+            <a class="secondary-button" href="#coleccion">Explorar estilo</a>
+          </div>
+          <div class="trust-strip" aria-label="Beneficios de compra">
+            <span>Envíos nacionales</span>
+            <span>Cambios fáciles</span>
+            <span>Atención por WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Logo de ARMON como referencia de diseño">
+          <div class="logo-orb">
+            <span>ARMON</span>
+          </div>
+          <div class="floating-card card-top">
+            <strong>Cápsula Glam</strong>
+            <span>Texturas satinadas + tonos neutros</span>
+          </div>
+          <div class="floating-card card-bottom">
+            <strong>-15%</strong>
+            <span>En tu primera compra online</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-band" id="coleccion" aria-label="Categorías destacadas">
+        <article>
+          <span>01</span>
+          <h2>Vestidos</h2>
+          <p>Siluetas fluidas para brunch, eventos y salidas de noche.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>Conjuntos</h2>
+          <p>Sets versátiles que elevan el guardarropa con poco esfuerzo.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>Accesorios</h2>
+          <p>Detalles dorados, perlas y piezas statement para completar looks.</p>
+        </article>
+      </section>
+
+      <section class="section-heading">
+        <p class="eyebrow">Selección ARMON</p>
+        <h2>Favoritos para comprar hoy</h2>
+        <p>
+          Una vitrina pensada como ecommerce: tarjetas de producto claras, precios visibles y
+          acciones rápidas para agregar al carrito.
+        </p>
+      </section>
+
+      <section class="products" id="productos" aria-label="Productos destacados">
+        <article class="product-card">
+          <div class="product-image satin"></div>
+          <div class="product-info">
+            <span class="tag">Nuevo</span>
+            <h3>Vestido Satin Rose</h3>
+            <p>Vestido midi satinado con caída suave y escote delicado.</p>
+            <div class="product-meta">
+              <strong>$89.900</strong>
+              <button type="button" class="cart-button">Agregar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card featured">
+          <div class="product-image linen"></div>
+          <div class="product-info">
+            <span class="tag">Más vendido</span>
+            <h3>Set Linen Aura</h3>
+            <p>Blazer ligero y pantalón amplio para un look femenino pulido.</p>
+            <div class="product-meta">
+              <strong>$129.900</strong>
+              <button type="button" class="cart-button">Agregar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image pearl"></div>
+          <div class="product-info">
+            <span class="tag">Edición limitada</span>
+            <h3>Bolso Pearl Mini</h3>
+            <p>Bolso compacto con asa perlada y acabado negro brillante.</p>
+            <div class="product-meta">
+              <strong>$69.900</strong>
+              <button type="button" class="cart-button">Agregar</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="lookbook" aria-label="Lookbook de temporada">
+        <div>
+          <p class="eyebrow">Mood de marca</p>
+          <h2>Minimalismo negro, luz plateada y feminidad moderna.</h2>
+          <p>
+            La dirección visual toma el contraste del logo de referencia: base negra, brillo
+            metálico, fondos suaves y una estética premium para transmitir confianza.
+          </p>
+          <a class="secondary-button dark" href="#contacto">Recibir asesoría</a>
+        </div>
+        <div class="lookbook-grid">
+          <span class="tile tall">Evening</span>
+          <span class="tile">Soft glam</span>
+          <span class="tile muted">Essentials</span>
+        </div>
+      </section>
+
+      <section class="experience" id="experiencia">
+        <div class="section-heading compact">
+          <p class="eyebrow">Compra boutique</p>
+          <h2>Una experiencia cercana y premium</h2>
+        </div>
+        <div class="benefits">
+          <article>
+            <span class="icon">01</span>
+            <h3>Asesoría personalizada</h3>
+            <p>Te ayudamos a elegir talla, combinaciones y piezas según tu ocasión.</p>
+          </article>
+          <article>
+            <span class="icon">02</span>
+            <h3>Pagos seguros</h3>
+            <p>Landing preparada para conectar con pasarelas y checkout ecommerce.</p>
+          </article>
+          <article>
+            <span class="icon">03</span>
+            <h3>Empaque de regalo</h3>
+            <p>Cada pedido llega con detalles cuidados y presentación de boutique.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="newsletter" id="contacto">
+        <div>
+          <p class="eyebrow">Comunidad ARMON</p>
+          <h2>Recibe lanzamientos, preventas y descuentos exclusivos.</h2>
+        </div>
+        <form class="signup-form">
+          <label for="email">Correo electrónico</label>
+          <div>
+            <input id="email" name="email" type="email" placeholder="tuemail@armon.com" required />
+            <button type="submit">Unirme</button>
+          </div>
+          <p class="form-note" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="brand footer-brand">
+        <span class="brand-mark">ARMON</span>
+        <span class="brand-copy">
+          <strong>ARMON</strong>
+          <small>Boutique femenina</small>
+        </span>
+      </div>
+      <p>Diseño ecommerce listo para presentar colecciones, productos y llamados de compra.</p>
+      <div class="social-links" aria-label="Redes sociales">
+        <a href="#inicio">Instagram</a>
+        <a href="#inicio">TikTok</a>
+        <a href="#inicio">WhatsApp</a>
+      </div>
+    </footer>
+
+    <div class="cart-toast" role="status" aria-live="polite">Producto agregado al carrito</div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
