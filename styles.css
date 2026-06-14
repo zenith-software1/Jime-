@@ -1261,11 +1261,33 @@ body.nav-open .main-nav {
 .hero-content {
   justify-content: end;
   width: 100%;
+  max-width: 100%;
   padding: 132px 20px 72px;
 }
 
 .hero h1 {
-  font-size: clamp(3.65rem, 18vw, 4.35rem);
+  max-width: min(100%, 420px);
+  font-size: clamp(3rem, 13.5vw, 3.55rem);
+  letter-spacing: -0.025em;
+  overflow-wrap: normal;
+}
+
+.hero-copy {
+  max-width: min(100%, 390px);
+}
+
+.premium-button {
+  max-width: 100%;
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: clamp(2.65rem, 13vw, 3rem);
+  }
+
+  .hero-copy {
+    font-size: 14px;
+  }
 }
 
 .hero-indicator {
