@@ -278,29 +278,34 @@ body.nav-open .menu-toggle span:last-child {
 .hero-media {
   z-index: -4;
   background:
-    url("https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1400&q=88")
-    center / cover;
-  filter: saturate(82%) contrast(110%) brightness(82%);
+    linear-gradient(115deg, rgba(11, 11, 11, 0.18), rgba(11, 11, 11, 0.44)),
+    url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=88")
+    58% 26% / cover;
+  filter: saturate(78%) contrast(112%) brightness(70%);
   transform: scale(1.01);
 }
 
 .hero-overlay {
   z-index: -3;
   background:
-    linear-gradient(0deg, rgba(11, 11, 11, 0.95) 0%, rgba(11, 11, 11, 0.62) 38%, rgba(11, 11, 11, 0.04) 100%),
-    linear-gradient(180deg, rgba(11, 11, 11, 0.24), rgba(11, 11, 11, 0.18));
+    linear-gradient(0deg, rgba(11, 11, 11, 0.97) 0%, rgba(11, 11, 11, 0.74) 34%, rgba(11, 11, 11, 0.18) 100%),
+    linear-gradient(90deg, rgba(11, 11, 11, 0.72) 0%, rgba(11, 11, 11, 0.16) 72%),
+    radial-gradient(circle at 72% 18%, rgba(241, 238, 232, 0.1), transparent 18rem);
 }
 
 .hero-glow {
   z-index: -2;
-  background: radial-gradient(circle at 68% 25%, rgba(241, 238, 232, 0.06), transparent 26rem);
+  background:
+    radial-gradient(circle at 74% 20%, rgba(241, 238, 232, 0.11), transparent 18rem),
+    radial-gradient(circle at 18% 72%, rgba(184, 180, 174, 0.08), transparent 16rem);
 }
 
 .hero::after {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(11, 11, 11, 0.55), transparent 20%),
-    linear-gradient(0deg, var(--black), transparent 16%);
+    linear-gradient(180deg, rgba(11, 11, 11, 0.72), transparent 22%),
+    linear-gradient(0deg, var(--black), transparent 18%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent 1px) 0 0 / 72px 100%;
   content: "";
 }
 
@@ -1302,10 +1307,15 @@ body.nav-open .main-nav {
   min-height: 720px;
 }
 
+.hero-media {
+  background-position: 54% 18%;
+}
+
 .hero-overlay {
   background:
-    linear-gradient(0deg, rgba(11, 11, 11, 0.95) 0%, rgba(11, 11, 11, 0.62) 38%, rgba(11, 11, 11, 0.04) 100%),
-    linear-gradient(180deg, rgba(11, 11, 11, 0.24), rgba(11, 11, 11, 0.18));
+    linear-gradient(0deg, rgba(11, 11, 11, 0.97) 0%, rgba(11, 11, 11, 0.74) 34%, rgba(11, 11, 11, 0.18) 100%),
+    linear-gradient(90deg, rgba(11, 11, 11, 0.72) 0%, rgba(11, 11, 11, 0.16) 72%),
+    radial-gradient(circle at 72% 18%, rgba(241, 238, 232, 0.1), transparent 18rem);
 }
 
 .hero-content {
