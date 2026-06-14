@@ -5,215 +5,255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Landing page ecommerce para ARMON, boutique femenina de prendas elegantes, accesorios y colecciones cápsula."
+      content="Mockup ecommerce premium mobile-first para Armon Boutique con estética luxury dark."
     />
-    <title>ARMON | Boutique femenina</title>
+    <title>Armon Boutique | Premium Ecommerce Mockup</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="ARMON inicio">
-        <span class="brand-mark">ARMON</span>
-        <span class="brand-copy">
-          <strong>ARMON</strong>
-          <small>Boutique femenina</small>
-        </span>
-      </a>
+    <header class="site-header" aria-label="Navegación principal">
+      <div class="nav-shell">
+        <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
 
-      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
+        <nav class="main-nav" aria-label="Secciones">
+          <a href="#inicio">Inicio</a>
+          <a href="#shop">Shop</a>
+          <a href="#colecciones">Colecciones</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
 
-      <nav class="main-nav" aria-label="Navegación principal">
-        <a href="#coleccion">Colección</a>
-        <a href="#productos">Productos</a>
-        <a href="#experiencia">Experiencia</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+        <a class="brand" href="#inicio" aria-label="Armon Boutique inicio">ARMON</a>
 
-      <a class="header-cta" href="#productos">Comprar ahora</a>
+        <div class="header-actions" aria-label="Acciones de tienda">
+          <button type="button" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m20 20-4.7-4.7m2.7-5.1a7.8 7.8 0 1 1-15.6 0 7.8 7.8 0 0 1 15.6 0Z" />
+            </svg>
+          </button>
+          <button type="button" aria-label="Perfil">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12.3a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm7.2 8.2a7.2 7.2 0 0 0-14.4 0" />
+            </svg>
+          </button>
+          <button class="cart-icon" type="button" aria-label="Carrito con dos productos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 8.2h12l-1.2 8.1H8L6.5 3.8H3.7m4.9 16.4h.1m8.2 0h.1" />
+            </svg>
+            <span>2</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <main>
       <section class="hero" id="inicio">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+
         <div class="hero-content">
-          <p class="eyebrow">Nueva colección · Primavera-Verano</p>
-          <h1>Moda femenina con presencia, brillo sutil y elegancia diaria.</h1>
-          <p class="hero-copy">
-            Descubre piezas seleccionadas para mujeres que buscan verse sofisticadas sin perder
-            comodidad: vestidos, conjuntos, accesorios y básicos elevados.
+          <p class="eyebrow reveal">AUTUMN / WINTER 24</p>
+          <h1 class="reveal">NEW COLLECTION</h1>
+          <p class="hero-copy reveal">
+            Prendas seleccionadas para noches precisas, siluetas limpias y presencia silenciosa.
+            Un mockup visual de boutique premium para explorar moda con estética luxury dark.
           </p>
-          <div class="hero-actions">
-            <a class="primary-button" href="#productos">Ver catálogo</a>
-            <a class="secondary-button" href="#coleccion">Explorar estilo</a>
-          </div>
-          <div class="trust-strip" aria-label="Beneficios de compra">
-            <span>Envíos nacionales</span>
-            <span>Cambios fáciles</span>
-            <span>Atención por WhatsApp</span>
-          </div>
+          <a class="premium-button reveal" href="#shop">Comprar ahora</a>
         </div>
 
-        <div class="hero-visual" aria-label="Logo de ARMON como referencia de diseño">
-          <div class="logo-orb">
-            <span>ARMON</span>
-          </div>
-          <div class="floating-card card-top">
-            <strong>Cápsula Glam</strong>
-            <span>Texturas satinadas + tonos neutros</span>
-          </div>
-          <div class="floating-card card-bottom">
-            <strong>-15%</strong>
-            <span>En tu primera compra online</span>
-          </div>
-        </div>
+        <p class="hero-indicator" aria-hidden="true">01 <span></span> 04</p>
       </section>
 
-      <section class="category-band" id="coleccion" aria-label="Categorías destacadas">
-        <article>
-          <span>01</span>
-          <h2>Vestidos</h2>
-          <p>Siluetas fluidas para brunch, eventos y salidas de noche.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h2>Conjuntos</h2>
-          <p>Sets versátiles que elevan el guardarropa con poco esfuerzo.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h2>Accesorios</h2>
-          <p>Detalles dorados, perlas y piezas statement para completar looks.</p>
-        </article>
-      </section>
-
-      <section class="section-heading">
-        <p class="eyebrow">Selección ARMON</p>
-        <h2>Favoritos para comprar hoy</h2>
-        <p>
-          Una vitrina pensada como ecommerce: tarjetas de producto claras, precios visibles y
-          acciones rápidas para agregar al carrito.
-        </p>
-      </section>
-
-      <section class="products" id="productos" aria-label="Productos destacados">
-        <article class="product-card">
-          <div class="product-image satin"></div>
-          <div class="product-info">
-            <span class="tag">Nuevo</span>
-            <h3>Vestido Satin Rose</h3>
-            <p>Vestido midi satinado con caída suave y escote delicado.</p>
-            <div class="product-meta">
-              <strong>$89.900</strong>
-              <button type="button" class="cart-button">Agregar</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card featured">
-          <div class="product-image linen"></div>
-          <div class="product-info">
-            <span class="tag">Más vendido</span>
-            <h3>Set Linen Aura</h3>
-            <p>Blazer ligero y pantalón amplio para un look femenino pulido.</p>
-            <div class="product-meta">
-              <strong>$129.900</strong>
-              <button type="button" class="cart-button">Agregar</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-image pearl"></div>
-          <div class="product-info">
-            <span class="tag">Edición limitada</span>
-            <h3>Bolso Pearl Mini</h3>
-            <p>Bolso compacto con asa perlada y acabado negro brillante.</p>
-            <div class="product-meta">
-              <strong>$69.900</strong>
-              <button type="button" class="cart-button">Agregar</button>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section class="lookbook" aria-label="Lookbook de temporada">
-        <div>
-          <p class="eyebrow">Mood de marca</p>
-          <h2>Minimalismo negro, luz plateada y feminidad moderna.</h2>
-          <p>
-            La dirección visual toma el contraste del logo de referencia: base negra, brillo
-            metálico, fondos suaves y una estética premium para transmitir confianza.
-          </p>
-          <a class="secondary-button dark" href="#contacto">Recibir asesoría</a>
-        </div>
-        <div class="lookbook-grid">
-          <span class="tile tall">Evening</span>
-          <span class="tile">Soft glam</span>
-          <span class="tile muted">Essentials</span>
-        </div>
-      </section>
-
-      <section class="experience" id="experiencia">
-        <div class="section-heading compact">
-          <p class="eyebrow">Compra boutique</p>
-          <h2>Una experiencia cercana y premium</h2>
-        </div>
-        <div class="benefits">
-          <article>
-            <span class="icon">01</span>
-            <h3>Asesoría personalizada</h3>
-            <p>Te ayudamos a elegir talla, combinaciones y piezas según tu ocasión.</p>
-          </article>
-          <article>
-            <span class="icon">02</span>
-            <h3>Pagos seguros</h3>
-            <p>Landing preparada para conectar con pasarelas y checkout ecommerce.</p>
-          </article>
-          <article>
-            <span class="icon">03</span>
-            <h3>Empaque de regalo</h3>
-            <p>Cada pedido llega con detalles cuidados y presentación de boutique.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="newsletter" id="contacto">
-        <div>
-          <p class="eyebrow">Comunidad ARMON</p>
-          <h2>Recibe lanzamientos, preventas y descuentos exclusivos.</h2>
-        </div>
-        <form class="signup-form">
-          <label for="email">Correo electrónico</label>
+      <section class="featured section-pad" id="shop" aria-labelledby="featured-title">
+        <div class="section-head reveal">
           <div>
-            <input id="email" name="email" type="email" placeholder="tuemail@armon.com" required />
-            <button type="submit">Unirme</button>
+            <p class="eyebrow">Curated Selection</p>
+            <h2 id="featured-title">Destacados</h2>
           </div>
-          <p class="form-note" role="status"></p>
-        </form>
+          <a class="underlined-link" href="#shop">Ver todo</a>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <button class="favorite-button" type="button" aria-label="Guardar Top Noire">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
+              </svg>
+            </button>
+            <div class="product-photo photo-top" role="img" aria-label="Top negro satinado"></div>
+            <div class="product-info">
+              <h3>Top Noire</h3>
+              <p>$899 MXN</p>
+              <button class="cart-button" type="button">Agregar al carrito</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <button class="favorite-button" type="button" aria-label="Guardar Denim Sienne">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
+              </svg>
+            </button>
+            <div class="product-photo photo-denim" role="img" aria-label="Denim azul en estudio"></div>
+            <div class="product-info">
+              <h3>Denim Sienne</h3>
+              <p>$1,290 MXN</p>
+              <button class="cart-button" type="button">Agregar al carrito</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <button class="favorite-button" type="button" aria-label="Guardar Vestido Éternel">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
+              </svg>
+            </button>
+            <div class="product-photo photo-dress" role="img" aria-label="Vestido elegante negro"></div>
+            <div class="product-info">
+              <h3>Vestido Éternel</h3>
+              <p>$1,690 MXN</p>
+              <button class="cart-button" type="button">Agregar al carrito</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <button class="favorite-button" type="button" aria-label="Guardar Collar Muse">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
+              </svg>
+            </button>
+            <div class="product-photo photo-necklace" role="img" aria-label="Collar plateado de boutique"></div>
+            <div class="product-info">
+              <h3>Collar Muse</h3>
+              <p>$590 MXN</p>
+              <button class="cart-button" type="button">Agregar al carrito</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="categories section-pad" id="colecciones" aria-labelledby="categories-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Discover</p>
+            <h2 id="categories-title">Explora por categoría</h2>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <a class="category-card category-tops reveal" href="#shop">
+            <span></span>
+            <h3>Tops</h3>
+          </a>
+          <a class="category-card category-jeans reveal" href="#shop">
+            <span></span>
+            <h3>Jeans</h3>
+          </a>
+          <a class="category-card category-dresses reveal" href="#shop">
+            <span></span>
+            <h3>Vestidos</h3>
+          </a>
+          <a class="category-card category-accessories reveal" href="#shop">
+            <span></span>
+            <h3>Accesorios</h3>
+          </a>
+        </div>
+      </section>
+
+      <section class="editorial" aria-labelledby="editorial-title">
+        <div class="editorial-image" aria-hidden="true"></div>
+        <div class="editorial-copy reveal">
+          <p class="eyebrow">THE EVENING EDIT</p>
+          <h2 id="editorial-title">Less noise. More presence.</h2>
+          <p>
+            Una cápsula visual para piezas sobrias, texturas profundas y destellos metálicos.
+            Diseñada para transmitir calma, precisión y una intención de compra elevada.
+          </p>
+          <a class="underlined-link" href="#colecciones">Descubrir colección</a>
+        </div>
+      </section>
+
+      <section class="instagram section-pad" aria-labelledby="instagram-title">
+        <div class="instagram-head reveal">
+          <p class="eyebrow">STAY INSPIRED</p>
+          <h2 id="instagram-title">Síguenos en Instagram</h2>
+          <a
+            href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq"
+            target="_blank"
+            rel="noreferrer"
+            >@armon.boutique</a
+          >
+        </div>
+
+        <div class="instagram-grid">
+          <a class="insta-shot insta-one reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
+          <a class="insta-shot insta-two reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
+          <a class="insta-shot insta-three reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
+          <a class="insta-shot insta-four reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
+        </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="brand footer-brand">
-        <span class="brand-mark">ARMON</span>
-        <span class="brand-copy">
-          <strong>ARMON</strong>
-          <small>Boutique femenina</small>
-        </span>
+    <footer class="site-footer" id="contacto">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#inicio">ARMON</a>
+          <p>
+            Boutique visual premium para colecciones femeninas con estética nocturna, cromados
+            sutiles y experiencia mobile-first.
+          </p>
+        </div>
+
+        <div>
+          <h3>Shop</h3>
+          <a href="#inicio">Nueva colección</a>
+          <a href="#shop">Best sellers</a>
+          <a href="#colecciones">Accesorios</a>
+        </div>
+
+        <div>
+          <h3>Ayuda</h3>
+          <a href="#contacto">Envíos</a>
+          <a href="#contacto">Cambios y devoluciones</a>
+          <a href="#contacto">Guía de tallas</a>
+        </div>
+
+        <div>
+          <h3>Contacto</h3>
+          <a href="mailto:hola@armonboutique.mx">hola@armonboutique.mx</a>
+          <a href="https://wa.me/525500000000">WhatsApp</a>
+          <div class="social-icons" aria-label="Redes sociales">
+            <a href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7.6 2.8h8.8a4.8 4.8 0 0 1 4.8 4.8v8.8a4.8 4.8 0 0 1-4.8 4.8H7.6a4.8 4.8 0 0 1-4.8-4.8V7.6a4.8 4.8 0 0 1 4.8-4.8Zm8.9 3.4h.1M12 16.1a4.1 4.1 0 1 0 0-8.2 4.1 4.1 0 0 0 0 8.2Z" />
+              </svg>
+            </a>
+            <a href="#contacto" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 8.5V6.7c0-.8.6-1.3 1.4-1.3h1.8V2.5h-2.5a4 4 0 0 0-4.2 4.1v1.9H8v3.1h2.5v9.9H14v-9.9h2.7l.5-3.1H14Z" />
+              </svg>
+            </a>
+            <a href="mailto:hola@armonboutique.mx" aria-label="Mensaje">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.2h16v11.6H4V6.2Zm1.2 1.3 6.8 5.2 6.8-5.2" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-      <p>Diseño ecommerce listo para presentar colecciones, productos y llamados de compra.</p>
-      <div class="social-links" aria-label="Redes sociales">
-        <a href="#inicio">Instagram</a>
-        <a href="#inicio">TikTok</a>
-        <a href="#inicio">WhatsApp</a>
+
+      <div class="footer-bottom">
+        <p>© 2026 ARMON BOUTIQUE. Todos los derechos reservados.</p>
+        <p>Quiet luxury for everyday presence.</p>
       </div>
     </footer>
 

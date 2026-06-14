@@ -1,13 +1,13 @@
-# ARMON boutique landing
+# ARMON Boutique premium mockup
 
-Landing page ecommerce estática para ARMON, una boutique femenina con una identidad visual
-inspirada en el logo circular negro con texto metalizado.
+Mockup ecommerce estático para ARMON Boutique con enfoque mobile-first, estética luxury dark,
+tipografía editorial y acentos cromados.
 
 ## Archivos principales
 
-- `index.html`: estructura de la landing, secciones de colección, productos, experiencia y contacto.
-- `styles.css`: sistema visual responsive, logo recreado con CSS, tarjetas de producto y lookbook.
-- `script.js`: menú móvil, feedback de carrito y formulario de newsletter.
+- `index.html`: estructura de la landing con navbar fija, hero, productos, categorías, editorial, Instagram y footer.
+- `styles.css`: sistema visual responsive, paleta dark premium, grids, animaciones, glassmorphism y hover states.
+- `script.js`: menú móvil y toast decorativo al agregar productos al carrito.
 
 ## Cómo verla
 
