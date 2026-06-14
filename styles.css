@@ -496,6 +496,12 @@ body.nav-open .menu-toggle span:last-child {
   stroke-width: 1.45;
 }
 
+.favorite-button span {
+  color: var(--text-soft);
+  font-size: 18px;
+  line-height: 1;
+}
+
 .product-photo {
   aspect-ratio: 3 / 4;
   background-position: center;
@@ -512,16 +518,60 @@ body.nav-open .menu-toggle span:last-child {
   background-image: url("https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=82");
 }
 
+.photo-top-2 {
+  background-image: url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-top-3 {
+  background-image: url("https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-top-4 {
+  background-image: url("https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=900&q=82");
+}
+
 .photo-denim {
   background-image: url("https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-denim-2 {
+  background-image: url("https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-denim-3 {
+  background-image: url("https://images.unsplash.com/photo-1582552938357-32b906df40cb?auto=format&fit=crop&w=900&q=82");
 }
 
 .photo-dress {
   background-image: url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=82");
 }
 
+.photo-dress-2 {
+  background-image: url("https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-dress-3 {
+  background-image: url("https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-dress-4 {
+  background-image: url("https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82");
+}
+
 .photo-necklace {
   background-image: url("https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-necklace-2 {
+  background-image: url("https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-necklace-3 {
+  background-image: url("https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=900&q=82");
+}
+
+.photo-necklace-4 {
+  background-image: url("https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=82");
 }
 
 .product-info {
@@ -646,7 +696,7 @@ body.nav-open .menu-toggle span:last-child {
 }
 
 .category-accessories {
-  background-image: url("https://images.unsplash.com/photo-1588444650700-6c4f642f73ad?auto=format&fit=crop&w=900&q=82");
+  background-image: url("https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=82");
 }
 
 .editorial {
@@ -1378,6 +1428,11 @@ body.nav-open .main-nav {
 
 .favorite-button.is-active svg {
   fill: var(--text-soft);
+}
+
+.favorite-button.is-active span {
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(241, 238, 232, 0.34);
 }
 
 .product-card.is-highlighted {
