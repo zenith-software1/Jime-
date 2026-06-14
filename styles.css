@@ -278,9 +278,9 @@ body.nav-open .menu-toggle span:last-child {
 .hero-media {
   z-index: -4;
   background:
-    url("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=85")
+    url("https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1400&q=88")
     center / cover;
-  filter: saturate(88%) contrast(106%) brightness(74%);
+  filter: saturate(82%) contrast(110%) brightness(82%);
   transform: scale(1.01);
 }
 
