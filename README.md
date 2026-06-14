@@ -7,7 +7,7 @@ tipografía editorial y acentos cromados.
 
 - `index.html`: estructura de la landing con navbar fija, hero, productos, categorías, editorial, Instagram y footer.
 - `styles.css`: sistema visual mobile-only, paleta dark premium, grids de teléfono, animaciones, glassmorphism y hover states.
-- `script.js`: menú móvil y toast decorativo al agregar productos al carrito.
+- `script.js`: menú móvil, búsqueda, carrito, favoritos, perfil y persistencia con `localStorage`.
 
 ## Cómo verla
 

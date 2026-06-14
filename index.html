@@ -34,21 +34,21 @@
         <a class="brand" href="#inicio" aria-label="Armon Boutique inicio">ARMON</a>
 
         <div class="header-actions" aria-label="Acciones de tienda">
-          <button type="button" aria-label="Buscar">
+          <button id="openSearch" type="button" aria-label="Buscar productos" aria-controls="searchPanel">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m20 20-4.7-4.7m2.7-5.1a7.8 7.8 0 1 1-15.6 0 7.8 7.8 0 0 1 15.6 0Z" />
             </svg>
           </button>
-          <button type="button" aria-label="Perfil">
+          <button id="openProfile" type="button" aria-label="Abrir perfil" aria-controls="profilePanel">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 12.3a4.4 4.4 0 1 0 0-8.8 4.4 4.4 0 0 0 0 8.8Zm7.2 8.2a7.2 7.2 0 0 0-14.4 0" />
             </svg>
           </button>
-          <button class="cart-icon" type="button" aria-label="Carrito con dos productos">
+          <button id="openCart" class="cart-icon" type="button" aria-label="Abrir carrito" aria-controls="cartPanel">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M7 8.2h12l-1.2 8.1H8L6.5 3.8H3.7m4.9 16.4h.1m8.2 0h.1" />
             </svg>
-            <span>2</span>
+            <span id="cartCount">0</span>
           </button>
         </div>
       </div>
@@ -83,8 +83,8 @@
         </div>
 
         <div class="product-grid">
-          <article class="product-card reveal">
-            <button class="favorite-button" type="button" aria-label="Guardar Top Noire">
+          <article class="product-card reveal" data-product-id="top-noire" data-product-name="Top Noire" data-product-price="899" data-product-category="Tops">
+            <button class="favorite-button" type="button" aria-label="Guardar Top Noire" aria-pressed="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
               </svg>
@@ -97,8 +97,8 @@
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <button class="favorite-button" type="button" aria-label="Guardar Denim Sienne">
+          <article class="product-card reveal" data-product-id="denim-sienne" data-product-name="Denim Sienne" data-product-price="1290" data-product-category="Jeans">
+            <button class="favorite-button" type="button" aria-label="Guardar Denim Sienne" aria-pressed="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
               </svg>
@@ -111,8 +111,8 @@
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <button class="favorite-button" type="button" aria-label="Guardar Vestido Éternel">
+          <article class="product-card reveal" data-product-id="vestido-eternel" data-product-name="Vestido Éternel" data-product-price="1690" data-product-category="Vestidos">
+            <button class="favorite-button" type="button" aria-label="Guardar Vestido Éternel" aria-pressed="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
               </svg>
@@ -125,8 +125,8 @@
             </div>
           </article>
 
-          <article class="product-card reveal">
-            <button class="favorite-button" type="button" aria-label="Guardar Collar Muse">
+          <article class="product-card reveal" data-product-id="collar-muse" data-product-name="Collar Muse" data-product-price="590" data-product-category="Accesorios">
+            <button class="favorite-button" type="button" aria-label="Guardar Collar Muse" aria-pressed="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.3 5.7a5.1 5.1 0 0 0-7.2 0L12 6.8l-1.1-1.1a5.1 5.1 0 1 0-7.2 7.2l1.1 1.1L12 21.2l7.2-7.2 1.1-1.1a5.1 5.1 0 0 0 0-7.2Z" />
               </svg>
@@ -150,19 +150,19 @@
         </div>
 
         <div class="category-grid">
-          <a class="category-card category-tops reveal" href="#shop">
+          <a class="category-card category-tops reveal" href="#shop" data-category-filter="Tops">
             <span></span>
             <h3>Tops</h3>
           </a>
-          <a class="category-card category-jeans reveal" href="#shop">
+          <a class="category-card category-jeans reveal" href="#shop" data-category-filter="Jeans">
             <span></span>
             <h3>Jeans</h3>
           </a>
-          <a class="category-card category-dresses reveal" href="#shop">
+          <a class="category-card category-dresses reveal" href="#shop" data-category-filter="Vestidos">
             <span></span>
             <h3>Vestidos</h3>
           </a>
-          <a class="category-card category-accessories reveal" href="#shop">
+          <a class="category-card category-accessories reveal" href="#shop" data-category-filter="Accesorios">
             <span></span>
             <h3>Accesorios</h3>
           </a>
@@ -222,9 +222,9 @@
 
         <div>
           <h3>Ayuda</h3>
-          <a href="#contacto">Envíos</a>
-          <a href="#contacto">Cambios y devoluciones</a>
-          <a href="#contacto">Guía de tallas</a>
+          <a href="#contacto" data-help-topic="Envíos">Envíos</a>
+          <a href="#contacto" data-help-topic="Cambios y devoluciones">Cambios y devoluciones</a>
+          <a href="#contacto" data-help-topic="Guía de tallas">Guía de tallas</a>
         </div>
 
         <div>
@@ -256,6 +256,66 @@
         <p>Quiet luxury for everyday presence.</p>
       </div>
     </footer>
+
+    <div class="panel-scrim" data-close-panels hidden></div>
+
+    <aside class="shop-panel" id="searchPanel" aria-hidden="true" aria-labelledby="searchPanelTitle">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Buscar</p>
+          <h2 id="searchPanelTitle">Encuentra tu pieza</h2>
+        </div>
+        <button class="panel-close" type="button" data-close-panels aria-label="Cerrar búsqueda">Cerrar</button>
+      </div>
+      <form class="search-form">
+        <label for="searchInput">Producto o categoría</label>
+        <div>
+          <input id="searchInput" name="search" type="search" placeholder="Ej. vestido, jeans, collar" autocomplete="off" />
+          <button type="submit">Buscar</button>
+        </div>
+      </form>
+      <div class="panel-list" id="searchResults" aria-live="polite"></div>
+    </aside>
+
+    <aside class="shop-panel" id="profilePanel" aria-hidden="true" aria-labelledby="profilePanelTitle">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Perfil</p>
+          <h2 id="profilePanelTitle">Tus datos</h2>
+        </div>
+        <button class="panel-close" type="button" data-close-panels aria-label="Cerrar perfil">Cerrar</button>
+      </div>
+      <form class="profile-form">
+        <label for="profileName">Nombre</label>
+        <input id="profileName" name="name" type="text" placeholder="Tu nombre" autocomplete="name" />
+        <label for="profileEmail">Correo</label>
+        <input id="profileEmail" name="email" type="email" placeholder="tuemail@armon.com" autocomplete="email" />
+        <label for="profilePhone">WhatsApp</label>
+        <input id="profilePhone" name="phone" type="tel" placeholder="+52..." autocomplete="tel" />
+        <button class="panel-primary" type="submit">Guardar info</button>
+      </form>
+      <p class="saved-note" id="profileStatus">Tu información se guarda en este navegador.</p>
+      <button class="panel-secondary" id="clearSavedData" type="button">Borrar datos guardados</button>
+    </aside>
+
+    <aside class="shop-panel cart-panel" id="cartPanel" aria-hidden="true" aria-labelledby="cartPanelTitle">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Carrito</p>
+          <h2 id="cartPanelTitle">Tu selección</h2>
+        </div>
+        <button class="panel-close" type="button" data-close-panels aria-label="Cerrar carrito">Cerrar</button>
+      </div>
+      <div class="panel-list" id="cartItems" aria-live="polite"></div>
+      <div class="cart-summary">
+        <span>Total</span>
+        <strong id="cartTotal">$0 MXN</strong>
+      </div>
+      <div class="panel-actions">
+        <button class="panel-secondary" id="clearCart" type="button">Vaciar</button>
+        <button class="panel-primary" id="checkoutButton" type="button">Preparar pedido</button>
+      </div>
+    </aside>
 
     <div class="cart-toast" role="status" aria-live="polite">Producto agregado al carrito</div>
 
