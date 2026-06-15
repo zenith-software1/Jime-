@@ -1223,7 +1223,6 @@ body.nav-open .menu-toggle span:last-child {
   }
 }
 
-/* Mobile-only presentation: keep the ecommerce mockup in a phone-width canvas at every viewport. */
 body {
   overflow-x: hidden;
 }

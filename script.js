@@ -234,7 +234,7 @@ function renderSearch(query = state.lastSearch) {
           `
         )
         .join("")
-    : '<p class="empty-state">No encontramos piezas con esa búsqueda. Prueba con tops, jeans, vestidos o accesorios.</p>';
+    : '<p class="empty-state">No encontramos piezas con esa búsqueda. Prueba con tops, jeans, vestidos o collares.</p>';
 }
 
 function highlightProduct(id) {
