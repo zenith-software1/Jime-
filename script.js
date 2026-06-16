@@ -26,6 +26,14 @@ const clearSavedDataButton = document.querySelector("#clearSavedData");
 const panelScrim = document.querySelector(".panel-scrim");
 const closePanelButtons = document.querySelectorAll("[data-close-panels]");
 const lazyImageElements = document.querySelectorAll(".product-photo, .category-card, .editorial-image, .insta-shot");
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const prefersReducedData = window.matchMedia?.("(prefers-reduced-data: reduce)")?.matches;
+const isSlowConnection = ["slow-2g", "2g"].includes(connection?.effectiveType);
+const shouldReduceData =
+  document.documentElement.classList.contains("data-saver") ||
+  Boolean(connection?.saveData || prefersReducedData || isSlowConnection);
+
+document.documentElement.classList.toggle("data-saver", shouldReduceData);
 
 const products = productCards.map((card) => ({
   id: card.dataset.productId,
@@ -53,26 +61,71 @@ const defaultState = {
 
 let state = loadState();
 
+function isRecord(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function normalizeCart(cart) {
+  if (!isRecord(cart)) return {};
+
+  return Object.entries(cart).reduce((normalized, [id, quantity]) => {
+    const parsedQuantity = Math.floor(Number(quantity));
+    if (!getProduct(id) || !Number.isFinite(parsedQuantity) || parsedQuantity <= 0) {
+      return normalized;
+    }
+
+    normalized[id] = parsedQuantity;
+    return normalized;
+  }, {});
+}
+
+function normalizeFavorites(favorites) {
+  if (!Array.isArray(favorites)) return [];
+
+  return favorites.filter((id, index, list) => {
+    return typeof id === "string" && getProduct(id) && list.indexOf(id) === index;
+  });
+}
+
+function normalizeProfile(profile) {
+  if (!isRecord(profile)) return { ...defaultState.profile };
+
+  return {
+    name: typeof profile.name === "string" ? profile.name : "",
+    email: typeof profile.email === "string" ? profile.email : "",
+    phone: typeof profile.phone === "string" ? profile.phone : "",
+  };
+}
+
+function normalizeText(value) {
+  return typeof value === "string" ? value : "";
+}
+
 function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!isRecord(saved)) return { ...defaultState, profile: { ...defaultState.profile } };
+
     return {
       ...defaultState,
-      ...saved,
-      profile: {
-        ...defaultState.profile,
-        ...(saved?.profile || {}),
-      },
-      cart: saved?.cart || {},
-      favorites: Array.isArray(saved?.favorites) ? saved.favorites : [],
+      cart: normalizeCart(saved.cart),
+      favorites: normalizeFavorites(saved.favorites),
+      profile: normalizeProfile(saved.profile),
+      lastSearch: normalizeText(saved.lastSearch),
+      lastCategory: normalizeText(saved.lastCategory),
+      lastAction: normalizeText(saved.lastAction),
     };
   } catch {
-    return { ...defaultState };
+    return { ...defaultState, profile: { ...defaultState.profile } };
   }
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Private browsing, full storage or blocked storage should not break the storefront.
+  }
 }
 
 function formatPrice(value) {
@@ -104,7 +157,7 @@ function openPanel(panel) {
     item?.classList.toggle("is-open", item === panel);
     item?.setAttribute("aria-hidden", String(item !== panel));
   });
-  panelScrim.hidden = false;
+  if (panelScrim) panelScrim.hidden = false;
 
   if (panel === searchPanel) {
     window.setTimeout(() => searchInput?.focus(), 80);
@@ -116,10 +169,12 @@ function closePanels() {
     panel?.classList.remove("is-open");
     panel?.setAttribute("aria-hidden", "true");
   });
-  panelScrim.hidden = true;
+  if (panelScrim) panelScrim.hidden = true;
 }
 
 function loadLazyImages() {
+  if (shouldReduceData) return;
+
   if (!("IntersectionObserver" in window)) {
     lazyImageElements.forEach((element) => element.classList.add("is-loaded"));
     return;
@@ -133,14 +188,14 @@ function loadLazyImages() {
         observer.unobserve(entry.target);
       });
     },
-    { rootMargin: "520px 0px" }
+    { rootMargin: "180px 0px" }
   );
 
   lazyImageElements.forEach((element) => imageObserver.observe(element));
 }
 
 function cartQuantity() {
-  return Object.values(state.cart).reduce((sum, quantity) => sum + quantity, 0);
+  return Object.values(state.cart).reduce((sum, quantity) => sum + Number(quantity || 0), 0);
 }
 
 function cartValue() {
@@ -151,6 +206,7 @@ function cartValue() {
 }
 
 function addToCart(id, quantity = 1) {
+  if (!getProduct(id)) return;
   state.cart[id] = (state.cart[id] || 0) + quantity;
   state.lastAction = `${getProduct(id)?.name || "Producto"} agregado al carrito`;
   saveState();
@@ -169,6 +225,8 @@ function updateCartItem(id, quantity) {
 }
 
 function renderCart() {
+  if (!cartCount || !cartItems || !cartTotal) return;
+
   const quantity = cartQuantity();
   cartCount.textContent = String(quantity);
   cartIcon?.classList.toggle("has-items", quantity > 0);
@@ -212,6 +270,8 @@ function renderFavorites() {
 
 function toggleFavorite(id) {
   const product = getProduct(id);
+  if (!product) return;
+
   const isActive = state.favorites.includes(id);
   state.favorites = isActive
     ? state.favorites.filter((favoriteId) => favoriteId !== id)
@@ -223,7 +283,7 @@ function toggleFavorite(id) {
 }
 
 function renderProfile() {
-  if (!profileForm) return;
+  if (!profileForm || !profileStatus) return;
   profileForm.elements.name.value = state.profile.name || "";
   profileForm.elements.email.value = state.profile.email || "";
   profileForm.elements.phone.value = state.profile.phone || "";
@@ -233,6 +293,8 @@ function renderProfile() {
 }
 
 function renderSearch(query = state.lastSearch) {
+  if (!searchInput || !searchResults) return;
+
   const term = query.trim().toLowerCase();
   searchInput.value = query;
 

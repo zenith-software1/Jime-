@@ -35,18 +35,47 @@
       name="twitter:image"
       content="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&h=630&q=90"
     />
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link
-      rel="preload"
-      as="image"
-      href="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=72"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <script>
+      (() => {
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const prefersReducedData = window.matchMedia?.("(prefers-reduced-data: reduce)")?.matches;
+        const isSlowConnection = ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const shouldReduceData = Boolean(connection?.saveData || prefersReducedData || isSlowConnection);
+
+        document.documentElement.classList.toggle("data-saver", shouldReduceData);
+
+        if (shouldReduceData) return;
+
+        const resources = [
+          { rel: "preconnect", href: "https://images.unsplash.com" },
+          { rel: "preconnect", href: "https://fonts.googleapis.com" },
+          { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+          {
+            rel: "preload",
+            as: "image",
+            href: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=72",
+          },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap",
+          },
+        ];
+
+        resources.forEach((resource) => {
+          const link = document.createElement("link");
+          Object.entries(resource).forEach(([key, value]) => {
+            link[key] = value;
+          });
+          document.head.appendChild(link);
+        });
+      })();
+    </script>
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
