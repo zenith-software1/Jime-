@@ -25,6 +25,7 @@ const profileStatus = document.querySelector("#profileStatus");
 const clearSavedDataButton = document.querySelector("#clearSavedData");
 const panelScrim = document.querySelector(".panel-scrim");
 const closePanelButtons = document.querySelectorAll("[data-close-panels]");
+const lazyImageElements = document.querySelectorAll(".product-photo, .category-card, .editorial-image, .insta-shot");
 
 const products = productCards.map((card) => ({
   id: card.dataset.productId,
@@ -116,6 +117,26 @@ function closePanels() {
     panel?.setAttribute("aria-hidden", "true");
   });
   panelScrim.hidden = true;
+}
+
+function loadLazyImages() {
+  if (!("IntersectionObserver" in window)) {
+    lazyImageElements.forEach((element) => element.classList.add("is-loaded"));
+    return;
+  }
+
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-loaded");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "520px 0px" }
+  );
+
+  lazyImageElements.forEach((element) => imageObserver.observe(element));
 }
 
 function cartQuantity() {
@@ -411,3 +432,4 @@ renderCart();
 renderFavorites();
 renderProfile();
 renderSearch();
+loadLazyImages();
