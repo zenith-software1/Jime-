@@ -6,7 +6,6 @@ const productCards = [...document.querySelectorAll(".product-card")];
 const cartButtons = document.querySelectorAll(".cart-button");
 const favoriteButtons = document.querySelectorAll(".favorite-button");
 const categoryLinks = document.querySelectorAll("[data-category-filter]");
-const helpLinks = document.querySelectorAll("[data-help-topic]");
 const cartToast = document.querySelector(".cart-toast");
 const cartCount = document.querySelector("#cartCount");
 const cartIcon = document.querySelector("#openCart");
@@ -428,14 +427,6 @@ categoryLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
     filterCategory(link.dataset.categoryFilter);
-  });
-});
-
-helpLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    state.lastAction = `Consulta abierta: ${link.dataset.helpTopic}`;
-    saveState();
-    showToast(link.dataset.helpTopic);
   });
 });
 
