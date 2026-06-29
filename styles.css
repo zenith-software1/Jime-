@@ -286,7 +286,7 @@ body.nav-open .menu-toggle span:last-child {
 .hero {
   position: relative;
   display: grid;
-  min-height: 720px;
+  min-height: clamp(520px, 72vh, 620px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -338,7 +338,7 @@ body.nav-open .menu-toggle span:last-child {
   justify-content: end;
   width: min(1500px, 100%);
   margin: 0 auto;
-  padding: 132px 20px 72px;
+  padding: 112px 20px 28px;
 }
 
 .eyebrow {
@@ -424,8 +424,8 @@ body.nav-open .menu-toggle span:last-child {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
+  gap: 10px;
+  margin-top: 22px;
 }
 
 .hero-actions .premium-button {
@@ -437,21 +437,23 @@ body.nav-open .menu-toggle span:last-child {
   align-items: center;
   justify-content: center;
   min-height: 56px;
-  padding: 16px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 16px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
-  color: var(--text-soft);
+  color: var(--text);
+  background: rgba(11, 11, 11, 0.42);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .ghost-button:hover,
 .ghost-button:focus-visible {
-  border-color: rgba(255, 255, 255, 0.42);
+  border-color: rgba(255, 255, 255, 0.38);
   color: #ffffff;
+  background: rgba(11, 11, 11, 0.62);
   transform: translateY(-2px);
 }
 
@@ -1481,7 +1483,7 @@ body.nav-open .main-nav {
 }
 
 .hero {
-  min-height: 720px;
+  min-height: clamp(500px, 68vh, 580px);
 }
 
 .hero-media {
@@ -1499,7 +1501,7 @@ body.nav-open .main-nav {
   justify-content: end;
   width: 100%;
   max-width: 100%;
-  padding: 132px 20px 72px;
+  padding: 108px 20px 24px;
 }
 
 .hero h1 {
