@@ -25,7 +25,7 @@ const profileStatus = document.querySelector("#profileStatus");
 const clearSavedDataButton = document.querySelector("#clearSavedData");
 const panelScrim = document.querySelector(".panel-scrim");
 const closePanelButtons = document.querySelectorAll("[data-close-panels]");
-const lazyImageElements = document.querySelectorAll(".product-photo, .category-card, .editorial-image, .insta-shot");
+const lazyImageElements = document.querySelectorAll(".editorial-image, .category-card");
 
 const products = productCards.map((card) => ({
   id: card.dataset.productId,
@@ -255,7 +255,7 @@ function renderSearch(query = state.lastSearch) {
           `
         )
         .join("")
-    : '<p class="empty-state">No encontramos piezas con esa búsqueda. Prueba con tops, jeans, vestidos o collares.</p>';
+    : '<p class="empty-state">No encontramos piezas con esa búsqueda. Prueba con fit, casual, corsé o alo.</p>';
 }
 
 function highlightProduct(id) {
@@ -274,7 +274,8 @@ function filterCategory(category) {
   state.lastSearch = category;
   saveState();
   renderSearch(category);
-  document.querySelector("#shop")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const targetId = category === "Fit" ? "fit" : category === "Casual" ? "casual" : "shop";
+  document.querySelector(`#${targetId}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   products.forEach((product) => {
     product.card.classList.toggle("is-highlighted", product.category === category);
   });
@@ -283,6 +284,37 @@ function filterCategory(category) {
     products.forEach((product) => product.card.classList.remove("is-highlighted"));
   }, 1500);
   showToast(`Mostrando ${category}`);
+}
+
+function initAmbientBackground() {
+  const ambientTargets = document.querySelectorAll("[data-accent-color]");
+  if (!("IntersectionObserver" in window) || !ambientTargets.length) {
+    return;
+  }
+
+  let activeColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim();
+
+  const ambientObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visible.length) return;
+
+      const nextColor = visible[0].target.dataset.accentColor;
+      if (!nextColor || nextColor === activeColor) return;
+
+      activeColor = nextColor;
+      document.documentElement.style.setProperty("--accent-color", nextColor);
+    },
+    {
+      threshold: [0.15, 0.35, 0.55, 0.75],
+      rootMargin: "-18% 0px -18% 0px",
+    }
+  );
+
+  ambientTargets.forEach((target) => ambientObserver.observe(target));
 }
 
 menuToggle?.addEventListener("click", () => {
@@ -433,3 +465,4 @@ renderFavorites();
 renderProfile();
 renderSearch();
 loadLazyImages();
+initAmbientBackground();

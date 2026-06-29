@@ -5,42 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Armon Boutique: tienda móvil de moda con tops, jeans, vestidos y collares seleccionados."
+      content="Armon Boutique: curaduría premium de ropa fit y casual. Piezas seleccionadas con estética editorial, no tienda genérica."
     />
-    <title>Armon Boutique | Tienda de moda</title>
+    <title>Armon Boutique | Curaduría Fit &amp; Casual</title>
     <link rel="canonical" href="https://armon.myzenith.space/" />
     <meta property="og:site_name" content="Armon Boutique" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://armon.myzenith.space/" />
-    <meta property="og:title" content="Armon Boutique | Tienda de moda" />
+    <meta property="og:title" content="Armon Boutique | Curaduría Fit &amp; Casual" />
     <meta
       property="og:description"
-      content="Explora 50 piezas seleccionadas: tops, jeans, vestidos y collares con estética premium."
+      content="Nueve piezas curadas: activewear Alo y corsés ALPER. Una experiencia boutique con ambiente que respira el color de cada prenda."
     />
-    <meta
-      property="og:image"
-      content="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&h=630&q=90"
-    />
-    <meta property="og:image:secure_url" content="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&h=630&q=90" />
+    <meta property="og:image" content="https://armon.myzenith.space/IMG-20260628-WA0031.jpg" />
+    <meta property="og:image:secure_url" content="https://armon.myzenith.space/IMG-20260628-WA0031.jpg" />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Editorial de moda premium en tonos oscuros para Armon Boutique" />
+    <meta property="og:image:height" content="1600" />
+    <meta property="og:image:alt" content="Curaduría premium Alo Yoga en Armon Boutique" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Armon Boutique | Tienda de moda" />
+    <meta name="twitter:title" content="Armon Boutique | Curaduría Fit &amp; Casual" />
     <meta
       name="twitter:description"
-      content="Tienda móvil con catálogo de 50 productos: tops, jeans, vestidos y collares."
+      content="Ropa fit y casual curada. Ambiente dinámico que sigue el tono de cada prenda."
     />
-    <meta
-      name="twitter:image"
-      content="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&h=630&q=90"
-    />
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link
-      rel="preload"
-      as="image"
-      href="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=72"
-    />
+    <meta name="twitter:image" content="https://armon.myzenith.space/IMG-20260628-WA0031.jpg" />
+    <link rel="preload" as="image" href="./IMG-20260628-WA0031.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -50,6 +39,8 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="ambient-bg" aria-hidden="true"></div>
+
     <header class="site-header" aria-label="Navegación principal">
       <div class="nav-shell">
         <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
@@ -59,8 +50,8 @@
 
         <nav class="main-nav" aria-label="Secciones">
           <a href="#inicio">Inicio</a>
-          <a href="#shop">Shop</a>
-          <a href="#colecciones">Colecciones</a>
+          <a href="#fit">Fit</a>
+          <a href="#casual">Casual</a>
           <a href="#contacto">Contacto</a>
         </nav>
 
@@ -88,125 +79,195 @@
     </header>
 
     <main>
-      <section class="hero" id="inicio">
+      <section class="hero" id="inicio" data-accent-color="#6b7078">
         <div class="hero-media" aria-hidden="true"></div>
         <div class="hero-overlay"></div>
         <div class="hero-glow" aria-hidden="true"></div>
 
         <div class="hero-content">
-          <p class="eyebrow reveal">AUTUMN / WINTER 24</p>
-          <h1 class="reveal">NEW COLLECTION</h1>
+          <p class="eyebrow reveal">CURATED EDIT</p>
+          <h1 class="reveal">PRESENCIA<br />SILENCIOSA</h1>
           <p class="hero-copy reveal">
-            Prendas seleccionadas para noches precisas, siluetas limpias y presencia silenciosa.
-            Moda curada para looks sobrios, femeninos y memorables.
+            Nueve piezas, dos universos. Activewear de línea y corsés de salida.
+            Una boutique que respira con el color de cada prenda.
           </p>
-          <a class="premium-button reveal" href="#shop">Comprar ahora</a>
-        </div>
-
-        <p class="hero-indicator" aria-hidden="true">01 <span></span> 04</p>
-      </section>
-
-      <section class="featured section-pad" id="shop" aria-labelledby="featured-title">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Curated Selection</p>
-            <h2 id="featured-title">Destacados</h2>
-          </div>
-          <a class="underlined-link" href="#shop">Ver todo</a>
-        </div>
-
-        <div class="product-grid">
-          <article class="product-card reveal" data-product-id="top-noire" data-product-name="Top Noire" data-product-price="899" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Noire" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top" role="img" aria-label="Top Noire"></div><div class="product-info"><h3>Top Noire</h3><p>$899 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-sienne" data-product-name="Denim Sienne" data-product-price="1290" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Sienne" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim" role="img" aria-label="Denim Sienne"></div><div class="product-info"><h3>Denim Sienne</h3><p>$1,290 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-eternel" data-product-name="Vestido Éternel" data-product-price="1690" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Éternel" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress" role="img" aria-label="Vestido Éternel"></div><div class="product-info"><h3>Vestido Éternel</h3><p>$1,690 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-muse" data-product-name="Collar Muse" data-product-price="590" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Muse" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace" role="img" aria-label="Collar Muse"></div><div class="product-info"><h3>Collar Muse</h3><p>$590 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-satin-aube" data-product-name="Top Satin Aube" data-product-price="940" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Satin Aube" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-2" role="img" aria-label="Top Satin Aube"></div><div class="product-info"><h3>Top Satin Aube</h3><p>$940 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-obsidienne" data-product-name="Jean Obsidienne" data-product-price="1390" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Obsidienne" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-2" role="img" aria-label="Jean Obsidienne"></div><div class="product-info"><h3>Jean Obsidienne</h3><p>$1,390 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-lune" data-product-name="Vestido Lune" data-product-price="1790" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Lune" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-2" role="img" aria-label="Vestido Lune"></div><div class="product-info"><h3>Vestido Lune</h3><p>$1,790 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-celeste" data-product-name="Collar Celeste" data-product-price="620" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Celeste" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-2" role="img" aria-label="Collar Celeste"></div><div class="product-info"><h3>Collar Celeste</h3><p>$620 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-velvet-minuit" data-product-name="Top Velvet Minuit" data-product-price="980" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Velvet Minuit" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-3" role="img" aria-label="Top Velvet Minuit"></div><div class="product-info"><h3>Top Velvet Minuit</h3><p>$980 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-riviera" data-product-name="Denim Riviera" data-product-price="1250" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Riviera" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-3" role="img" aria-label="Denim Riviera"></div><div class="product-info"><h3>Denim Riviera</h3><p>$1,250 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-noir-slip" data-product-name="Vestido Noir Slip" data-product-price="1590" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Noir Slip" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-3" role="img" aria-label="Vestido Noir Slip"></div><div class="product-info"><h3>Vestido Noir Slip</h3><p>$1,590 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-aurora" data-product-name="Collar Aurora" data-product-price="690" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Aurora" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-3" role="img" aria-label="Collar Aurora"></div><div class="product-info"><h3>Collar Aurora</h3><p>$690 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-perla-soft" data-product-name="Top Perla Soft" data-product-price="890" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Perla Soft" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-4" role="img" aria-label="Top Perla Soft"></div><div class="product-info"><h3>Top Perla Soft</h3><p>$890 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-wide-noir" data-product-name="Jean Wide Noir" data-product-price="1450" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Wide Noir" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim" role="img" aria-label="Jean Wide Noir"></div><div class="product-info"><h3>Jean Wide Noir</h3><p>$1,450 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-aura-midi" data-product-name="Vestido Aura Midi" data-product-price="1820" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Aura Midi" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-4" role="img" aria-label="Vestido Aura Midi"></div><div class="product-info"><h3>Vestido Aura Midi</h3><p>$1,820 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-nocturne" data-product-name="Collar Nocturne" data-product-price="740" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Nocturne" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-4" role="img" aria-label="Collar Nocturne"></div><div class="product-info"><h3>Collar Nocturne</h3><p>$740 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-corset-onyx" data-product-name="Top Corset Onyx" data-product-price="1120" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Corset Onyx" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top" role="img" aria-label="Top Corset Onyx"></div><div class="product-info"><h3>Top Corset Onyx</h3><p>$1,120 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-ash" data-product-name="Denim Ash" data-product-price="1320" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Ash" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-2" role="img" aria-label="Denim Ash"></div><div class="product-info"><h3>Denim Ash</h3><p>$1,320 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-muse-satin" data-product-name="Vestido Muse Satin" data-product-price="1890" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Muse Satin" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress" role="img" aria-label="Vestido Muse Satin"></div><div class="product-info"><h3>Vestido Muse Satin</h3><p>$1,890 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-luna" data-product-name="Collar Luna" data-product-price="580" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Luna" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace" role="img" aria-label="Collar Luna"></div><div class="product-info"><h3>Collar Luna</h3><p>$580 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-linen-ivory" data-product-name="Top Linen Ivory" data-product-price="870" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Linen Ivory" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-2" role="img" aria-label="Top Linen Ivory"></div><div class="product-info"><h3>Top Linen Ivory</h3><p>$870 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-flare-lune" data-product-name="Jean Flare Lune" data-product-price="1410" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Flare Lune" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-3" role="img" aria-label="Jean Flare Lune"></div><div class="product-info"><h3>Jean Flare Lune</h3><p>$1,410 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-celeste" data-product-name="Vestido Celeste" data-product-price="1650" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Celeste" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-2" role="img" aria-label="Vestido Celeste"></div><div class="product-info"><h3>Vestido Celeste</h3><p>$1,650 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-perla" data-product-name="Collar Perla" data-product-price="640" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Perla" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-2" role="img" aria-label="Collar Perla"></div><div class="product-info"><h3>Collar Perla</h3><p>$640 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-muse-metal" data-product-name="Top Muse Metal" data-product-price="990" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Muse Metal" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-3" role="img" aria-label="Top Muse Metal"></div><div class="product-info"><h3>Top Muse Metal</h3><p>$990 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-straight-bleu" data-product-name="Denim Straight Bleu" data-product-price="1360" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Straight Bleu" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim" role="img" aria-label="Denim Straight Bleu"></div><div class="product-info"><h3>Denim Straight Bleu</h3><p>$1,360 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-opera" data-product-name="Vestido Opera" data-product-price="1990" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Opera" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-3" role="img" aria-label="Vestido Opera"></div><div class="product-info"><h3>Vestido Opera</h3><p>$1,990 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-riviera" data-product-name="Collar Riviera" data-product-price="760" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Riviera" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-3" role="img" aria-label="Collar Riviera"></div><div class="product-info"><h3>Collar Riviera</h3><p>$760 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-bella-nuit" data-product-name="Top Bella Nuit" data-product-price="920" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Bella Nuit" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-4" role="img" aria-label="Top Bella Nuit"></div><div class="product-info"><h3>Top Bella Nuit</h3><p>$920 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-muse-grey" data-product-name="Jean Muse Grey" data-product-price="1280" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Muse Grey" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-2" role="img" aria-label="Jean Muse Grey"></div><div class="product-info"><h3>Jean Muse Grey</h3><p>$1,280 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-minuit" data-product-name="Vestido Minuit" data-product-price="1750" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Minuit" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-4" role="img" aria-label="Vestido Minuit"></div><div class="product-info"><h3>Vestido Minuit</h3><p>$1,750 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-etoile" data-product-name="Collar Etoile" data-product-price="680" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Etoile" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-4" role="img" aria-label="Collar Etoile"></div><div class="product-info"><h3>Collar Etoile</h3><p>$680 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-sienne-cream" data-product-name="Top Sienne Cream" data-product-price="960" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Sienne Cream" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top" role="img" aria-label="Top Sienne Cream"></div><div class="product-info"><h3>Top Sienne Cream</h3><p>$960 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-cargo-nuit" data-product-name="Denim Cargo Nuit" data-product-price="1490" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Cargo Nuit" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-3" role="img" aria-label="Denim Cargo Nuit"></div><div class="product-info"><h3>Denim Cargo Nuit</h3><p>$1,490 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-perla" data-product-name="Vestido Perla" data-product-price="1680" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Perla" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress" role="img" aria-label="Vestido Perla"></div><div class="product-info"><h3>Vestido Perla</h3><p>$1,680 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-sculpt" data-product-name="Collar Sculpt" data-product-price="790" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Sculpt" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace" role="img" aria-label="Collar Sculpt"></div><div class="product-info"><h3>Collar Sculpt</h3><p>$790 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-lumiere-black" data-product-name="Top Lumiere Black" data-product-price="1030" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Lumiere Black" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-2" role="img" aria-label="Top Lumiere Black"></div><div class="product-info"><h3>Top Lumiere Black</h3><p>$1,030 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-sculpt-ivory" data-product-name="Jean Sculpt Ivory" data-product-price="1520" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Sculpt Ivory" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim" role="img" aria-label="Jean Sculpt Ivory"></div><div class="product-info"><h3>Jean Sculpt Ivory</h3><p>$1,520 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-sienne" data-product-name="Vestido Sienne" data-product-price="1720" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Sienne" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-2" role="img" aria-label="Vestido Sienne"></div><div class="product-info"><h3>Vestido Sienne</h3><p>$1,720 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-opera" data-product-name="Collar Opera" data-product-price="820" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Opera" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-2" role="img" aria-label="Collar Opera"></div><div class="product-info"><h3>Collar Opera</h3><p>$820 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-rib-etoile" data-product-name="Top Rib Etoile" data-product-price="840" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Rib Etoile" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-3" role="img" aria-label="Top Rib Etoile"></div><div class="product-info"><h3>Top Rib Etoile</h3><p>$840 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="denim-vintage-ciel" data-product-name="Denim Vintage Ciel" data-product-price="1190" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Denim Vintage Ciel" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-2" role="img" aria-label="Denim Vintage Ciel"></div><div class="product-info"><h3>Denim Vintage Ciel</h3><p>$1,190 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-velvet" data-product-name="Vestido Velvet" data-product-price="2050" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Velvet" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-3" role="img" aria-label="Vestido Velvet"></div><div class="product-info"><h3>Vestido Velvet</h3><p>$2,050 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-sienne" data-product-name="Collar Sienne" data-product-price="610" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Sienne" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-3" role="img" aria-label="Collar Sienne"></div><div class="product-info"><h3>Collar Sienne</h3><p>$610 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-silk-mocha" data-product-name="Top Silk Mocha" data-product-price="1080" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Silk Mocha" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top-4" role="img" aria-label="Top Silk Mocha"></div><div class="product-info"><h3>Top Silk Mocha</h3><p>$1,080 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="jean-satin-black" data-product-name="Jean Satin Black" data-product-price="1580" data-product-category="Jeans"><button class="favorite-button" type="button" aria-label="Guardar Jean Satin Black" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-denim-3" role="img" aria-label="Jean Satin Black"></div><div class="product-info"><h3>Jean Satin Black</h3><p>$1,580 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="vestido-silver-line" data-product-name="Vestido Silver Line" data-product-price="2150" data-product-category="Vestidos"><button class="favorite-button" type="button" aria-label="Guardar Vestido Silver Line" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-dress-4" role="img" aria-label="Vestido Silver Line"></div><div class="product-info"><h3>Vestido Silver Line</h3><p>$2,150 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-onyx" data-product-name="Collar Onyx" data-product-price="850" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Onyx" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace-4" role="img" aria-label="Collar Onyx"></div><div class="product-info"><h3>Collar Onyx</h3><p>$850 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="top-aura-silver" data-product-name="Top Aura Silver" data-product-price="1150" data-product-category="Tops"><button class="favorite-button" type="button" aria-label="Guardar Top Aura Silver" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-top" role="img" aria-label="Top Aura Silver"></div><div class="product-info"><h3>Top Aura Silver</h3><p>$1,150 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-          <article class="product-card reveal" data-product-id="collar-silver-drop" data-product-name="Collar Silver Drop" data-product-price="890" data-product-category="Collares"><button class="favorite-button" type="button" aria-label="Guardar Collar Silver Drop" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button><div class="product-photo photo-necklace" role="img" aria-label="Collar Silver Drop"></div><div class="product-info"><h3>Collar Silver Drop</h3><p>$890 MXN</p><button class="cart-button" type="button">Agregar al carrito</button></div></article>
-        </div>
-      </section>
-
-      <section class="categories section-pad" id="colecciones" aria-labelledby="categories-title">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Discover</p>
-            <h2 id="categories-title">Explora por categoría</h2>
+          <div class="hero-actions reveal">
+            <a class="premium-button" href="#fit">Explorar Fit</a>
+            <a class="ghost-button" href="#casual">Ver Casual</a>
           </div>
         </div>
+      </section>
 
-        <div class="category-grid">
-          <a class="category-card category-tops reveal" href="#shop" data-category-filter="Tops">
-            <span></span>
-            <h3>Tops</h3>
-          </a>
-          <a class="category-card category-jeans reveal" href="#shop" data-category-filter="Jeans">
-            <span></span>
-            <h3>Jeans</h3>
-          </a>
-          <a class="category-card category-dresses reveal" href="#shop" data-category-filter="Vestidos">
-            <span></span>
-            <h3>Vestidos</h3>
-          </a>
-          <a class="category-card category-accessories reveal" href="#shop" data-category-filter="Collares">
-            <span></span>
-            <h3>Collares</h3>
-          </a>
+      <section class="collection-gateways section-pad" aria-label="Colecciones">
+        <a class="gateway-card gateway-fit reveal" href="#fit" data-category-filter="Fit" data-accent-color="#6b7a88">
+          <img src="./IMG-20260628-WA0036.jpg" alt="Colección Fit Alo Yoga" loading="lazy" />
+          <div class="gateway-copy">
+            <p class="eyebrow">01 — Activewear</p>
+            <h2>Fit</h2>
+            <span class="gateway-link">Entrar</span>
+          </div>
+        </a>
+        <a class="gateway-card gateway-casual reveal" href="#casual" data-category-filter="Casual" data-accent-color="#8f3048">
+          <img src="./IMG-20260628-WA0032.jpg" alt="Colección Casual ALPER" loading="lazy" />
+          <div class="gateway-copy">
+            <p class="eyebrow">02 — Going Out</p>
+            <h2>Casual</h2>
+            <span class="gateway-link">Entrar</span>
+          </div>
+        </a>
+      </section>
+
+      <section class="collection-section section-pad" id="fit" data-accent-color="#6b7a88" aria-labelledby="fit-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Activewear Curated</p>
+            <h2 id="fit-title">Fit</h2>
+          </div>
+          <p class="section-note">Alo Yoga · Siluetas técnicas · Presencia de showroom</p>
+        </div>
+
+        <div class="editorial-catalog">
+          <article class="product-card reveal" data-product-id="set-alo-plata" data-product-name="Set Alo Plata" data-product-price="2190" data-product-category="Fit" data-accent-color="#aeb2b8">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0036.jpg" alt="Set Alo Plata en maniquí" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Set Alo Plata" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Set Alo Plata</h3>
+              <p class="product-price">$2,190 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="set-alo-carbon" data-product-name="Set Alo Carbón" data-product-price="2090" data-product-category="Fit" data-accent-color="#5a5856">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0026.jpg" alt="Set Alo Carbón con piping" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Set Alo Carbón" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Set Alo Carbón</h3>
+              <p class="product-price">$2,090 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="set-alo-studio" data-product-name="Set Alo Studio" data-product-price="1990" data-product-category="Fit" data-accent-color="#c4c8cc">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0023.jpg" alt="Set Alo Studio plata con chaqueta negra" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Set Alo Studio" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Set Alo Studio</h3>
+              <p class="product-price">$1,990 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="chaqueta-carbon" data-product-name="Chaqueta Crop Carbón" data-product-price="2490" data-product-category="Fit" data-accent-color="#48464a">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0028.jpg" alt="Chaqueta crop carbón Alo" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Chaqueta Crop Carbón" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Chaqueta Crop Carbón</h3>
+              <p class="product-price">$2,490 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="chaqueta-oliva" data-product-name="Chaqueta Oliva Alo" data-product-price="2390" data-product-category="Fit" data-accent-color="#4f4e38">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0030.jpg" alt="Chaqueta oliva camo Alo" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Chaqueta Oliva Alo" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Chaqueta Oliva Alo</h3>
+              <p class="product-price">$2,390 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="hoodie-camo-gris" data-product-name="Hoodie Camo Gris" data-product-price="2590" data-product-category="Fit" data-accent-color="#7a7976">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0031.jpg" alt="Hoodie camo gris Alo con leggings" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Hoodie Camo Gris" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Fit · Alo</p>
+              <h3>Hoodie Camo Gris</h3>
+              <p class="product-price">$2,590 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="editorial" aria-labelledby="editorial-title">
+      <section class="collection-section section-pad" id="casual" data-accent-color="#8f3048" aria-labelledby="casual-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Evening Edit</p>
+            <h2 id="casual-title">Casual</h2>
+          </div>
+          <p class="section-note">Corsés estructurados · Salida nocturna · Silueta precisa</p>
+        </div>
+
+        <div class="editorial-catalog">
+          <article class="product-card reveal" data-product-id="corse-negro" data-product-name="Corsé Negro Mesh" data-product-price="1390" data-product-category="Casual" data-accent-color="#1a1420">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0021.jpg" alt="Corsé negro mesh con jeans" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Corsé Negro Mesh" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Casual · Mesh</p>
+              <h3>Corsé Negro Mesh</h3>
+              <p class="product-price">$1,390 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="corse-rojo-alper" data-product-name="Corsé Rojo ALPER" data-product-price="1590" data-product-category="Casual" data-accent-color="#b8143f">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0032.jpg" alt="Corsé rojo ALPER con jeans" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Corsé Rojo ALPER" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Casual · ALPER</p>
+              <h3>Corsé Rojo ALPER</h3>
+              <p class="product-price">$1,590 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+
+          <article class="product-card reveal" data-product-id="corse-bronce" data-product-name="Corsé Bronce Estructurado" data-product-price="1490" data-product-category="Casual" data-accent-color="#96704e">
+            <div class="product-visual">
+              <img class="product-photo" src="./IMG-20260628-WA0035.jpg" alt="Corsé bronce estructurado con jeans" width="800" height="1067" loading="lazy" />
+              <button class="favorite-button" type="button" aria-label="Guardar Corsé Bronce Estructurado" aria-pressed="false"><span aria-hidden="true">&#9825;</span></button>
+            </div>
+            <div class="product-info">
+              <p class="product-line">Casual · Estructurado</p>
+              <h3>Corsé Bronce Estructurado</h3>
+              <p class="product-price">$1,490 MXN</p>
+              <button class="cart-button" type="button">Añadir</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="editorial" aria-labelledby="editorial-title" data-accent-color="#3d4248">
         <div class="editorial-image" aria-hidden="true"></div>
         <div class="editorial-copy reveal">
-          <p class="eyebrow">THE EVENING EDIT</p>
-          <h2 id="editorial-title">Less noise. More presence.</h2>
+          <p class="eyebrow">THE BOUTIQUE CODE</p>
+          <h2 id="editorial-title">Menos catálogo.<br />Más curaduría.</h2>
           <p>
-            Una cápsula visual para piezas sobrias, texturas profundas y destellos metálicos.
-            Diseñada para transmitir calma, precisión y una intención de compra elevada.
+            Cada pieza tiene su luz. El ambiente de la tienda se tiñe lentamente del tono
+            dominante mientras recorres fit y casual — como entrar a un showroom, no a un template.
           </p>
-          <a class="underlined-link" href="#colecciones">Descubrir colección</a>
+          <a class="underlined-link" href="#fit">Ver colección Fit</a>
         </div>
       </section>
 
@@ -223,10 +284,18 @@
         </div>
 
         <div class="instagram-grid">
-          <a class="insta-shot insta-one reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
-          <a class="insta-shot insta-two reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
-          <a class="insta-shot insta-three reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
-          <a class="insta-shot insta-four reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique"></a>
+          <a class="insta-shot reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique">
+            <img src="./IMG-20260628-WA0031.jpg" alt="" loading="lazy" />
+          </a>
+          <a class="insta-shot reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique">
+            <img src="./IMG-20260628-WA0032.jpg" alt="" loading="lazy" />
+          </a>
+          <a class="insta-shot reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique">
+            <img src="./IMG-20260628-WA0028.jpg" alt="" loading="lazy" />
+          </a>
+          <a class="insta-shot reveal" href="https://www.instagram.com/armonik_ar?igsh=OThqNmZnaWZyMjNq" target="_blank" rel="noreferrer" aria-label="Ver Instagram de Armon Boutique">
+            <img src="./IMG-20260628-WA0035.jpg" alt="" loading="lazy" />
+          </a>
         </div>
       </section>
     </main>
@@ -236,15 +305,15 @@
         <div class="footer-brand">
           <a class="brand" href="#inicio">ARMON</a>
           <p>
-            Boutique de moda femenina con estética nocturna, cromados sutiles y compra móvil.
+            Boutique curada con estética nocturna. Fit y casual en una sola experiencia editorial.
           </p>
         </div>
 
         <div>
           <h3>Shop</h3>
-          <a href="#inicio">Nueva colección</a>
-          <a href="#shop">Best sellers</a>
-          <a href="#colecciones">Collares</a>
+          <a href="#fit">Colección Fit</a>
+          <a href="#casual">Colección Casual</a>
+          <a href="#inicio">Nueva temporada</a>
         </div>
 
         <div>
@@ -297,7 +366,7 @@
       <form class="search-form">
         <label for="searchInput">Producto o categoría</label>
         <div>
-          <input id="searchInput" name="search" type="search" placeholder="Ej. vestido, jeans, collar" autocomplete="off" />
+          <input id="searchInput" name="search" type="search" placeholder="Ej. fit, casual, corsé, alo" autocomplete="off" />
           <button type="submit">Buscar</button>
         </div>
       </form>
