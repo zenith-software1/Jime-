@@ -838,6 +838,46 @@ body.nav-open .menu-toggle span:last-child {
   background-image: url("https://images.unsplash.com/photo-1520975682031-a89af567c3d7?auto=format&fit=crop&w=420&q=70");
 }
 
+.data-saver .hero-media {
+  background:
+    radial-gradient(circle at 72% 18%, rgba(241, 238, 232, 0.12), transparent 17rem),
+    linear-gradient(135deg, rgba(241, 238, 232, 0.08), rgba(255, 255, 255, 0.018) 42%, transparent 70%),
+    #101010 !important;
+  filter: none;
+}
+
+.data-saver .product-photo,
+.data-saver .category-card,
+.data-saver .editorial-image,
+.data-saver .insta-shot {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.014)),
+    radial-gradient(circle at 28% 18%, rgba(241, 238, 232, 0.08), transparent 12rem),
+    #101010 !important;
+  filter: none;
+}
+
+@media (prefers-reduced-data: reduce) {
+  .hero-media {
+    background:
+      radial-gradient(circle at 72% 18%, rgba(241, 238, 232, 0.12), transparent 17rem),
+      linear-gradient(135deg, rgba(241, 238, 232, 0.08), rgba(255, 255, 255, 0.018) 42%, transparent 70%),
+      #101010 !important;
+    filter: none;
+  }
+
+  .product-photo,
+  .category-card,
+  .editorial-image,
+  .insta-shot {
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.014)),
+      radial-gradient(circle at 28% 18%, rgba(241, 238, 232, 0.08), transparent 12rem),
+      #101010 !important;
+    filter: none;
+  }
+}
+
 .site-footer {
   width: min(1500px, 100%);
   margin: 86px auto 0;
