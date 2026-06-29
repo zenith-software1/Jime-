@@ -3,12 +3,18 @@ const STORAGE_KEY = "armonBoutiqueState";
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelectorAll(".main-nav a");
 const productCards = [...document.querySelectorAll(".product-card")];
+const cartButtons = document.querySelectorAll(".cart-button");
+const favoriteButtons = document.querySelectorAll(".favorite-button");
 const categoryLinks = document.querySelectorAll("[data-category-filter]");
 const helpLinks = document.querySelectorAll("[data-help-topic]");
 const cartToast = document.querySelector(".cart-toast");
 const cartCount = document.querySelector("#cartCount");
 const cartIcon = document.querySelector("#openCart");
 const cartPanel = document.querySelector("#cartPanel");
+const favoritesIcon = document.querySelector("#openFavorites");
+const favoritesPanel = document.querySelector("#favoritesPanel");
+const favoritesCount = document.querySelector("#favoritesCount");
+const favoritesItems = document.querySelector("#favoritesItems");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
 const clearCartButton = document.querySelector("#clearCart");
@@ -17,42 +23,36 @@ const searchPanel = document.querySelector("#searchPanel");
 const searchForm = document.querySelector(".search-form");
 const searchInput = document.querySelector("#searchInput");
 const searchResults = document.querySelector("#searchResults");
-const favoritesIcon = document.querySelector("#openFavorites");
-const favoritesPanel = document.querySelector("#favoritesPanel");
-const favoritesCount = document.querySelector("#favoritesCount");
-const favoritesItems = document.querySelector("#favoritesItems");
 const profilePanel = document.querySelector("#profilePanel");
 const profileForm = document.querySelector(".profile-form");
 const profileStatus = document.querySelector("#profileStatus");
 const clearSavedDataButton = document.querySelector("#clearSavedData");
 const panelScrim = document.querySelector(".panel-scrim");
 const closePanelButtons = document.querySelectorAll("[data-close-panels]");
-const ambientBg = document.querySelector(".ambient-bg");
-
-const panels = [searchPanel, favoritesPanel, profilePanel, cartPanel];
+const lazyImageElements = document.querySelectorAll(".editorial-image, .category-card");
 
 const products = productCards.map((card) => ({
   id: card.dataset.productId,
   name: card.dataset.productName,
   price: Number(card.dataset.productPrice),
   category: card.dataset.productCategory,
-  image: card.dataset.productImage || "",
-  thumb: card.dataset.productImage
-    ? card.dataset.productImage.replace("/product/", "/thumb/")
-    : "",
+  image: card.querySelector(".product-photo")?.getAttribute("src") || "",
   card,
 }));
 
 let toastTimer;
 let highlightedTimer;
 let ambientTimer;
-let ambientColor = "#0b0b0b";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const defaultState = {
   cart: {},
   favorites: [],
-  profile: { name: "", email: "", phone: "" },
+  profile: {
+    name: "",
+    email: "",
+    phone: "",
+  },
   lastSearch: "",
   lastCategory: "",
   lastAction: "",
@@ -66,7 +66,10 @@ function loadState() {
     return {
       ...defaultState,
       ...saved,
-      profile: { ...defaultState.profile, ...(saved?.profile || {}) },
+      profile: {
+        ...defaultState.profile,
+        ...(saved?.profile || {}),
+      },
       cart: saved?.cart || {},
       favorites: Array.isArray(saved?.favorites) ? saved.favorites : [],
     };
@@ -97,25 +100,50 @@ function showToast(message = "Producto agregado al carrito") {
   cartToast.textContent = message;
   cartToast.classList.add("is-visible");
   window.clearTimeout(toastTimer);
-  toastTimer = window.setTimeout(() => cartToast.classList.remove("is-visible"), 1600);
+  toastTimer = window.setTimeout(() => {
+    cartToast.classList.remove("is-visible");
+  }, 1800);
 }
 
 function openPanel(panel) {
   closeMenu();
-  panels.forEach((item) => {
+  [searchPanel, favoritesPanel, profilePanel, cartPanel].forEach((item) => {
     item?.classList.toggle("is-open", item === panel);
     item?.setAttribute("aria-hidden", String(item !== panel));
   });
   panelScrim.hidden = false;
-  if (panel === searchPanel) window.setTimeout(() => searchInput?.focus(), 60);
+
+  if (panel === searchPanel) {
+    window.setTimeout(() => searchInput?.focus(), 80);
+  }
 }
 
 function closePanels() {
-  panels.forEach((panel) => {
+  [searchPanel, favoritesPanel, profilePanel, cartPanel].forEach((panel) => {
     panel?.classList.remove("is-open");
     panel?.setAttribute("aria-hidden", "true");
   });
   panelScrim.hidden = true;
+}
+
+function loadLazyImages() {
+  if (!("IntersectionObserver" in window)) {
+    lazyImageElements.forEach((element) => element.classList.add("is-loaded"));
+    return;
+  }
+
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-loaded");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "520px 0px" }
+  );
+
+  lazyImageElements.forEach((element) => imageObserver.observe(element));
 }
 
 function cartQuantity() {
@@ -138,8 +166,11 @@ function addToCart(id, quantity = 1) {
 }
 
 function updateCartItem(id, quantity) {
-  if (quantity <= 0) delete state.cart[id];
-  else state.cart[id] = quantity;
+  if (quantity <= 0) {
+    delete state.cart[id];
+  } else {
+    state.cart[id] = quantity;
+  }
   saveState();
   renderCart();
 }
@@ -147,11 +178,12 @@ function updateCartItem(id, quantity) {
 function renderCart() {
   const quantity = cartQuantity();
   cartCount.textContent = String(quantity);
+  cartIcon?.classList.toggle("has-items", quantity > 0);
   cartIcon?.setAttribute("aria-label", quantity ? `Abrir carrito con ${quantity} productos` : "Abrir carrito");
   cartTotal.textContent = formatPrice(cartValue());
 
   if (!quantity) {
-    cartItems.innerHTML = '<p class="empty-state">Tu carrito está vacío.</p>';
+    cartItems.innerHTML = '<p class="empty-state">Tu carrito está vacío. Agrega una pieza para guardar tu selección.</p>';
     return;
   }
 
@@ -165,10 +197,10 @@ function renderCart() {
             <h3>${product.name}</h3>
             <p>${formatPrice(product.price)} · ${product.category}</p>
           </div>
-          <div class="cart-controls">
-            <button class="quantity-button" type="button" data-cart-minus="${product.id}" aria-label="Quitar">-</button>
+          <div class="cart-controls" data-cart-controls="${product.id}">
+            <button class="quantity-button" type="button" data-cart-minus="${product.id}" aria-label="Quitar ${product.name}">-</button>
             <span>${itemQuantity}</span>
-            <button class="quantity-button" type="button" data-cart-plus="${product.id}" aria-label="Agregar">+</button>
+            <button class="quantity-button" type="button" data-cart-plus="${product.id}" aria-label="Agregar ${product.name}">+</button>
           </div>
         </article>
       `;
@@ -177,12 +209,11 @@ function renderCart() {
 }
 
 function renderFavorites() {
-  productCards.forEach((card) => {
-    const button = card.querySelector(".favorite-button");
-    const productId = card.dataset.productId;
+  favoriteButtons.forEach((button) => {
+    const productId = button.closest(".product-card")?.dataset.productId;
     const isActive = state.favorites.includes(productId);
-    button?.classList.toggle("is-active", isActive);
-    button?.setAttribute("aria-pressed", String(isActive));
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
   renderFavoritesPanel();
 }
@@ -190,11 +221,17 @@ function renderFavorites() {
 function renderFavoritesPanel() {
   const count = state.favorites.length;
   if (favoritesCount) favoritesCount.textContent = String(count);
-  favoritesIcon?.setAttribute("aria-label", count ? `Abrir favoritos con ${count} piezas` : "Abrir favoritos");
+  favoritesIcon?.classList.toggle("has-items", count > 0);
+  favoritesIcon?.setAttribute(
+    "aria-label",
+    count ? `Abrir favoritos con ${count} piezas` : "Abrir favoritos"
+  );
+
   if (!favoritesItems) return;
 
   if (!count) {
-    favoritesItems.innerHTML = '<p class="empty-state">Toca el corazón en una pieza para guardarla aquí.</p>';
+    favoritesItems.innerHTML =
+      '<p class="empty-state">Aún no guardas favoritos. Toca el corazón en una pieza para tenerla aquí.</p>';
     return;
   }
 
@@ -204,7 +241,7 @@ function renderFavoritesPanel() {
       if (!product) return "";
       return `
         <article class="favorite-item">
-          <img class="favorite-thumb" src="${product.thumb}" alt="" width="48" height="58" loading="lazy" decoding="async" />
+          <img class="favorite-thumb" src="${product.image}" alt="" loading="lazy" />
           <div class="favorite-copy">
             <button class="result-text" type="button" data-scroll-product="${product.id}">
               <h3>${product.name}</h3>
@@ -223,14 +260,14 @@ function renderFavoritesPanel() {
 
 function toggleFavorite(id) {
   const product = getProduct(id);
-  if (!product) return;
   const isActive = state.favorites.includes(id);
   state.favorites = isActive
     ? state.favorites.filter((favoriteId) => favoriteId !== id)
     : [...state.favorites, id];
+  state.lastAction = isActive ? `${product.name} quitado de favoritos` : `${product.name} guardado en favoritos`;
   saveState();
   renderFavorites();
-  showToast(isActive ? `${product.name} quitado de favoritos` : `${product.name} guardado en favoritos`);
+  showToast(state.lastAction);
 }
 
 function renderProfile() {
@@ -239,15 +276,16 @@ function renderProfile() {
   profileForm.elements.email.value = state.profile.email || "";
   profileForm.elements.phone.value = state.profile.phone || "";
   profileStatus.textContent = state.profile.name
-    ? `Hola, ${state.profile.name}. Datos guardados en este navegador.`
+    ? `Hola, ${state.profile.name}. Tus datos quedaron guardados en este navegador.`
     : "Tu información se guarda en este navegador.";
 }
 
 function renderSearch(query = state.lastSearch) {
   const term = query.trim().toLowerCase();
   searchInput.value = query;
+
   const matches = products.filter((product) => {
-    const searchable = `${product.name} ${product.category}`.toLowerCase();
+    const searchable = `${product.name} ${product.category} ${product.id}`.toLowerCase();
     return !term || searchable.includes(term);
   });
 
@@ -265,16 +303,18 @@ function renderSearch(query = state.lastSearch) {
           `
         )
         .join("")
-    : '<p class="empty-state">Prueba con fit, casual o corsé.</p>';
+    : '<p class="empty-state">No encontramos piezas con esa búsqueda. Prueba con fit, casual, corsé o alo.</p>';
 }
 
 function highlightProduct(id) {
   const product = getProduct(id);
   if (!product) return;
-  product.card.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
+  product.card.scrollIntoView({ behavior: "smooth", block: "center" });
   product.card.classList.add("is-highlighted");
   window.clearTimeout(highlightedTimer);
-  highlightedTimer = window.setTimeout(() => product.card.classList.remove("is-highlighted"), 1200);
+  highlightedTimer = window.setTimeout(() => {
+    product.card.classList.remove("is-highlighted");
+  }, 1600);
 }
 
 function filterCategory(category) {
@@ -282,41 +322,52 @@ function filterCategory(category) {
   state.lastSearch = category;
   saveState();
   renderSearch(category);
-  const targetId = category === "Fit" ? "fit" : "casual";
-  document.querySelector(`#${targetId}`)?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+  const targetId = category === "Fit" ? "fit" : category === "Casual" ? "casual" : "shop";
+  document.querySelector(`#${targetId}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  products.forEach((product) => {
+    product.card.classList.toggle("is-highlighted", product.category === category);
+  });
+  window.clearTimeout(highlightedTimer);
+  highlightedTimer = window.setTimeout(() => {
+    products.forEach((product) => product.card.classList.remove("is-highlighted"));
+  }, 1500);
   showToast(`Mostrando ${category}`);
 }
 
-function hexToRgb(hex) {
-  const value = Number.parseInt(hex.replace("#", ""), 16);
-  return [(value >> 16) & 255, (value >> 8) & 255, value & 255];
-}
-
-function setAmbientColor(hex) {
-  if (!ambientBg || prefersReducedMotion || hex === ambientColor) return;
-  ambientColor = hex;
-  window.clearTimeout(ambientTimer);
-  ambientTimer = window.setTimeout(() => {
-    const [r, g, b] = hexToRgb(hex);
-    ambientBg.style.background = `
-      radial-gradient(ellipse 120% 80% at 50% -5%, rgba(${r}, ${g}, ${b}, 0.28), transparent 60%),
-      radial-gradient(ellipse 80% 60% at 100% 90%, rgba(${r}, ${g}, ${b}, 0.12), transparent 55%),
-      #0b0b0b`;
-  }, 120);
-}
-
 function initAmbientBackground() {
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) return;
+  if (prefersReducedMotion) return;
+
+  const ambientTargets = document.querySelectorAll("[data-accent-color]");
+  if (!("IntersectionObserver" in window) || !ambientTargets.length) {
+    return;
+  }
+
+  let activeColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim();
 
   const ambientObserver = new IntersectionObserver(
     (entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (visible[0]?.target.dataset.accentColor) setAmbientColor(visible[0].target.dataset.accentColor);
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visible.length) return;
+
+      const nextColor = visible[0].target.dataset.accentColor;
+      if (!nextColor || nextColor === activeColor) return;
+
+      activeColor = nextColor;
+      window.clearTimeout(ambientTimer);
+      ambientTimer = window.setTimeout(() => {
+        document.documentElement.style.setProperty("--accent-color", nextColor);
+      }, 150);
     },
-    { threshold: 0.35, rootMargin: "-10% 0px -10% 0px" }
+    {
+      threshold: 0.35,
+      rootMargin: "-12% 0px -12% 0px",
+    }
   );
 
-  document.querySelectorAll("[data-accent-color]").forEach((target) => ambientObserver.observe(target));
+  ambientTargets.forEach((target) => ambientObserver.observe(target));
 }
 
 menuToggle?.addEventListener("click", () => {
@@ -324,7 +375,9 @@ menuToggle?.addEventListener("click", () => {
   menuToggle.setAttribute("aria-expanded", String(isOpen));
 });
 
-navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+navLinks.forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
 
 document.querySelector("#openSearch")?.addEventListener("click", () => {
   renderSearch();
@@ -346,8 +399,9 @@ cartIcon?.addEventListener("click", () => {
   openPanel(cartPanel);
 });
 
-closePanelButtons.forEach((button) => button.addEventListener("click", closePanels));
-panelScrim?.addEventListener("click", closePanels);
+closePanelButtons.forEach((button) => {
+  button.addEventListener("click", closePanels);
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
@@ -356,44 +410,53 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-document.addEventListener("click", (event) => {
-  const cartButton = event.target.closest(".cart-button");
-  const favoriteButton = event.target.closest(".favorite-button");
-  const categoryLink = event.target.closest("[data-category-filter]");
-  const helpLink = event.target.closest("[data-help-topic]");
+cartButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.closest(".product-card")?.dataset.productId;
+    addToCart(productId);
+  });
+});
 
-  if (cartButton) {
-    const productId = cartButton.closest(".product-card")?.dataset.productId;
-    if (productId) addToCart(productId);
-    return;
-  }
+favoriteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.closest(".product-card")?.dataset.productId;
+    toggleFavorite(productId);
+  });
+});
 
-  if (favoriteButton) {
-    const productId = favoriteButton.closest(".product-card")?.dataset.productId;
-    if (productId) toggleFavorite(productId);
-    return;
-  }
-
-  if (categoryLink) {
+categoryLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
     event.preventDefault();
-    filterCategory(categoryLink.dataset.categoryFilter);
-    return;
-  }
+    filterCategory(link.dataset.categoryFilter);
+  });
+});
 
-  if (helpLink) {
-    showToast(helpLink.dataset.helpTopic);
-  }
+helpLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    state.lastAction = `Consulta abierta: ${link.dataset.helpTopic}`;
+    saveState();
+    showToast(link.dataset.helpTopic);
+  });
 });
 
 cartItems?.addEventListener("click", (event) => {
   const plus = event.target.closest("[data-cart-plus]");
   const minus = event.target.closest("[data-cart-minus]");
-  if (plus) updateCartItem(plus.dataset.cartPlus, (state.cart[plus.dataset.cartPlus] || 0) + 1);
-  if (minus) updateCartItem(minus.dataset.cartMinus, (state.cart[minus.dataset.cartMinus] || 0) - 1);
+
+  if (plus) {
+    const id = plus.dataset.cartPlus;
+    updateCartItem(id, (state.cart[id] || 0) + 1);
+  }
+
+  if (minus) {
+    const id = minus.dataset.cartMinus;
+    updateCartItem(id, (state.cart[id] || 0) - 1);
+  }
 });
 
 clearCartButton?.addEventListener("click", () => {
   state.cart = {};
+  state.lastAction = "Carrito vacío";
   saveState();
   renderCart();
   showToast("Carrito vacío");
@@ -404,6 +467,19 @@ checkoutButton?.addEventListener("click", () => {
     showToast("Agrega productos primero");
     return;
   }
+
+  const lines = Object.entries(state.cart)
+    .map(([id, quantity]) => {
+      const product = getProduct(id);
+      return product ? `${quantity}x ${product.name} · ${formatPrice(product.price)}` : "";
+    })
+    .filter(Boolean);
+
+  const message = encodeURIComponent(
+    `Hola ARMON, me interesa:\n${lines.join("\n")}\n\nTotal: ${formatPrice(cartValue())}`
+  );
+
+  window.open(`https://wa.me/524776798491?text=${message}`, "_blank", "noopener,noreferrer");
   showToast("Pedido preparado para WhatsApp");
 });
 
@@ -414,21 +490,39 @@ searchForm?.addEventListener("submit", (event) => {
   renderSearch(state.lastSearch);
 });
 
-function handlePanelAction(event) {
-  const addButton = event.target.closest("[data-add-result], [data-add-favorite]");
-  const removeButton = event.target.closest("[data-remove-favorite]");
+searchResults?.addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add-result]");
   const scrollButton = event.target.closest("[data-scroll-product]");
 
-  if (addButton) addToCart(addButton.dataset.addResult || addButton.dataset.addFavorite);
-  if (removeButton) toggleFavorite(removeButton.dataset.removeFavorite);
+  if (addButton) {
+    addToCart(addButton.dataset.addResult);
+    renderSearch(searchInput.value);
+  }
+
   if (scrollButton) {
     closePanels();
     highlightProduct(scrollButton.dataset.scrollProduct);
   }
-}
+});
 
-searchResults?.addEventListener("click", handlePanelAction);
-favoritesItems?.addEventListener("click", handlePanelAction);
+favoritesItems?.addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add-favorite]");
+  const removeButton = event.target.closest("[data-remove-favorite]");
+  const scrollButton = event.target.closest("[data-scroll-product]");
+
+  if (addButton) {
+    addToCart(addButton.dataset.addFavorite);
+  }
+
+  if (removeButton) {
+    toggleFavorite(removeButton.dataset.removeFavorite);
+  }
+
+  if (scrollButton) {
+    closePanels();
+    highlightProduct(scrollButton.dataset.scrollProduct);
+  }
+});
 
 profileForm?.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -438,16 +532,18 @@ profileForm?.addEventListener("submit", (event) => {
     email: String(formData.get("email") || "").trim(),
     phone: String(formData.get("phone") || "").trim(),
   };
+  state.lastAction = "Perfil guardado";
   saveState();
   renderProfile();
   showToast("Info guardada");
 });
 
 clearSavedDataButton?.addEventListener("click", () => {
-  state = { ...defaultState, profile: { ...defaultState.profile } };
+  state = { ...defaultState, profile: { ...defaultState.profile }, cart: {}, favorites: [] };
   saveState();
   renderCart();
   renderFavorites();
+  renderFavoritesPanel();
   renderProfile();
   renderSearch("");
   showToast("Datos borrados");
@@ -457,4 +553,5 @@ renderCart();
 renderFavorites();
 renderProfile();
 renderSearch();
+loadLazyImages();
 initAmbientBackground();
