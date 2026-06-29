@@ -11,6 +11,10 @@ const cartToast = document.querySelector(".cart-toast");
 const cartCount = document.querySelector("#cartCount");
 const cartIcon = document.querySelector("#openCart");
 const cartPanel = document.querySelector("#cartPanel");
+const favoritesIcon = document.querySelector("#openFavorites");
+const favoritesPanel = document.querySelector("#favoritesPanel");
+const favoritesCount = document.querySelector("#favoritesCount");
+const favoritesItems = document.querySelector("#favoritesItems");
 const cartItems = document.querySelector("#cartItems");
 const cartTotal = document.querySelector("#cartTotal");
 const clearCartButton = document.querySelector("#clearCart");
@@ -32,6 +36,7 @@ const products = productCards.map((card) => ({
   name: card.dataset.productName,
   price: Number(card.dataset.productPrice),
   category: card.dataset.productCategory,
+  image: card.querySelector(".product-photo")?.getAttribute("src") || "",
   card,
 }));
 
@@ -100,7 +105,7 @@ function showToast(message = "Producto agregado al carrito") {
 
 function openPanel(panel) {
   closeMenu();
-  [searchPanel, profilePanel, cartPanel].forEach((item) => {
+  [searchPanel, favoritesPanel, profilePanel, cartPanel].forEach((item) => {
     item?.classList.toggle("is-open", item === panel);
     item?.setAttribute("aria-hidden", String(item !== panel));
   });
@@ -112,7 +117,7 @@ function openPanel(panel) {
 }
 
 function closePanels() {
-  [searchPanel, profilePanel, cartPanel].forEach((panel) => {
+  [searchPanel, favoritesPanel, profilePanel, cartPanel].forEach((panel) => {
     panel?.classList.remove("is-open");
     panel?.setAttribute("aria-hidden", "true");
   });
@@ -208,6 +213,47 @@ function renderFavorites() {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+  renderFavoritesPanel();
+}
+
+function renderFavoritesPanel() {
+  const count = state.favorites.length;
+  if (favoritesCount) favoritesCount.textContent = String(count);
+  favoritesIcon?.classList.toggle("has-items", count > 0);
+  favoritesIcon?.setAttribute(
+    "aria-label",
+    count ? `Abrir favoritos con ${count} piezas` : "Abrir favoritos"
+  );
+
+  if (!favoritesItems) return;
+
+  if (!count) {
+    favoritesItems.innerHTML =
+      '<p class="empty-state">Aún no guardas favoritos. Toca el corazón en una pieza para tenerla aquí.</p>';
+    return;
+  }
+
+  favoritesItems.innerHTML = state.favorites
+    .map((id) => {
+      const product = getProduct(id);
+      if (!product) return "";
+      return `
+        <article class="favorite-item">
+          <img class="favorite-thumb" src="${product.image}" alt="" loading="lazy" />
+          <div class="favorite-copy">
+            <button class="result-text" type="button" data-scroll-product="${product.id}">
+              <h3>${product.name}</h3>
+              <p>${product.category} · ${formatPrice(product.price)}</p>
+            </button>
+          </div>
+          <div class="favorite-actions">
+            <button class="result-add" type="button" data-add-favorite="${product.id}">Agregar</button>
+            <button class="favorite-remove" type="button" data-remove-favorite="${product.id}">Quitar</button>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
 }
 
 function toggleFavorite(id) {
@@ -331,6 +377,11 @@ document.querySelector("#openSearch")?.addEventListener("click", () => {
   openPanel(searchPanel);
 });
 
+document.querySelector("#openFavorites")?.addEventListener("click", () => {
+  renderFavoritesPanel();
+  openPanel(favoritesPanel);
+});
+
 document.querySelector("#openProfile")?.addEventListener("click", () => {
   renderProfile();
   openPanel(profilePanel);
@@ -436,6 +487,25 @@ searchResults?.addEventListener("click", (event) => {
   }
 });
 
+favoritesItems?.addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add-favorite]");
+  const removeButton = event.target.closest("[data-remove-favorite]");
+  const scrollButton = event.target.closest("[data-scroll-product]");
+
+  if (addButton) {
+    addToCart(addButton.dataset.addFavorite);
+  }
+
+  if (removeButton) {
+    toggleFavorite(removeButton.dataset.removeFavorite);
+  }
+
+  if (scrollButton) {
+    closePanels();
+    highlightProduct(scrollButton.dataset.scrollProduct);
+  }
+});
+
 profileForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(profileForm);
@@ -455,6 +525,7 @@ clearSavedDataButton?.addEventListener("click", () => {
   saveState();
   renderCart();
   renderFavorites();
+  renderFavoritesPanel();
   renderProfile();
   renderSearch("");
   showToast("Datos borrados");
