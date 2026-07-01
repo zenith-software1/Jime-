@@ -113,12 +113,10 @@ function freeShippingHint(subtotal) {
   return `Agrega ${formatPrice(remaining)} más para envío gratis.`;
 }
 
-function renderProductCard(product, index) {
-  const priority = index < 2 ? "auto" : "low";
-  const loading = index < 4 ? "eager" : "lazy";
+function renderProductCard(product) {
   return `
     <article
-      class="product-card reveal"
+      class="product-card"
       data-product-id="${product.id}"
       data-product-name="${product.name}"
       data-product-price="${product.price}"
@@ -136,10 +134,10 @@ function renderProductCard(product, index) {
         src="${product.image}"
         alt="${product.alt}"
         width="400"
-        height="533"
-        loading="${loading}"
+        height="400"
+        loading="lazy"
         decoding="async"
-        fetchpriority="${priority}"
+        fetchpriority="low"
       />
       <div class="product-info">
         <h3>${product.name}</h3>
@@ -155,14 +153,12 @@ function renderProductGrids() {
 
   if (fitProductGrid) {
     const fitItems = products.filter((product) => product.category === "Fit");
-    fitProductGrid.innerHTML = fitItems.map((product, index) => renderProductCard(product, index)).join("");
+    fitProductGrid.innerHTML = fitItems.map((product) => renderProductCard(product)).join("");
   }
 
   if (casualProductGrid) {
     const casualItems = products.filter((product) => product.category === "Casual");
-    casualProductGrid.innerHTML = casualItems
-      .map((product, index) => renderProductCard(product, index))
-      .join("");
+    casualProductGrid.innerHTML = casualItems.map((product) => renderProductCard(product)).join("");
   }
 
   productCards = [...document.querySelectorAll(".product-card")];
@@ -522,27 +518,53 @@ function filterCategory(category) {
 }
 
 function initAmbientBackground() {
-  const ambientTargets = document.querySelectorAll("[data-accent-color]");
+  const ambientTargets = document.querySelectorAll(
+    "section[data-accent-color], .gateway-card[data-accent-color], .editorial[data-accent-color], .product-card[data-accent-color]"
+  );
   if (!("IntersectionObserver" in window) || !ambientTargets.length) return;
 
   let activeColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim();
   let frame = null;
+  let lastChange = 0;
+  const visible = new Map();
+  const throttleMs = window.matchMedia("(hover: none)").matches ? 420 : 260;
+
+  const applyAmbient = (target) => {
+    const nextColor = target?.dataset.accentColor;
+    if (!nextColor || nextColor === activeColor) return;
+
+    const now = performance.now();
+    if (now - lastChange < throttleMs) return;
+    lastChange = now;
+
+    if (frame) window.cancelAnimationFrame(frame);
+    frame = window.requestAnimationFrame(() => {
+      activeColor = nextColor;
+      document.documentElement.style.setProperty("--accent-color", nextColor);
+    });
+  };
 
   const ambientObserver = new IntersectionObserver(
     (entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (!visible.length) return;
-
-      const nextColor = visible[0].target.dataset.accentColor;
-      if (!nextColor || nextColor === activeColor) return;
-
-      if (frame) window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        activeColor = nextColor;
-        document.documentElement.style.setProperty("--accent-color", nextColor);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.set(entry.target, entry.intersectionRatio);
+        else visible.delete(entry.target);
       });
+
+      if (!visible.size) return;
+
+      let bestTarget = null;
+      let bestRatio = -1;
+      visible.forEach((ratio, target) => {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestTarget = target;
+        }
+      });
+
+      applyAmbient(bestTarget);
     },
-    { threshold: [0.15, 0.35, 0.55], rootMargin: "-18% 0px -18% 0px" }
+    { threshold: [0, 0.2, 0.4, 0.6, 0.8], rootMargin: "-30% 0px -30% 0px" }
   );
 
   ambientTargets.forEach((target) => ambientObserver.observe(target));
