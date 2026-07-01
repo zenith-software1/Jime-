@@ -597,7 +597,7 @@ body.nav-open .menu-toggle span:last-child {
 }
 
 .product-grid {
-  gap: 12px;
+  gap: 10px;
 }
 
 .product-card {
@@ -608,35 +608,29 @@ body.nav-open .menu-toggle span:last-child {
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
     var(--panel);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
-  content-visibility: auto;
-  contain-intrinsic-size: 280px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
   transition:
-    transform 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .product-card:hover {
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-  transform: translateY(-4px);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.24);
 }
 
 .favorite-button {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   z-index: 2;
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
-  background: rgba(11, 11, 11, 0.42);
-  backdrop-filter: blur(10px);
+  background: rgba(11, 11, 11, 0.55);
 }
 
 .favorite-button svg {
@@ -657,15 +651,14 @@ body.nav-open .menu-toggle span:last-child {
 .product-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  object-position: center 22%;
   background: #101010;
-  filter: saturate(90%) contrast(106%) brightness(94%);
-  transition: transform 0.7s ease;
 }
 
 .product-card:hover .product-photo {
-  transform: scale(1.03);
+  transform: none;
 }
 
 .photo-top.is-loaded {
@@ -730,8 +723,8 @@ body.nav-open .menu-toggle span:last-child {
 
 .product-info {
   display: grid;
-  gap: 8px;
-  padding: 13px 10px 12px;
+  gap: 6px;
+  padding: 10px 8px 10px;
 }
 
 .product-info h3 {
@@ -760,9 +753,9 @@ body.nav-open .menu-toggle span:last-child {
 }
 
 .cart-button {
-  min-height: 38px;
-  margin-top: 2px;
-  padding: 11px 8px;
+  min-height: 34px;
+  margin-top: 0;
+  padding: 9px 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   color: var(--text);
@@ -1538,6 +1531,12 @@ body.nav-open .main-nav {
   padding: 78px 20px 0;
 }
 
+@media (max-width: 720px) {
+  html {
+    transition: --accent-color 1.4s ease;
+  }
+}
+
 .section-head {
   align-items: start;
   flex-direction: column;
@@ -1567,11 +1566,11 @@ body.nav-open .main-nav {
 }
 
 .product-info {
-  padding: 13px 10px 12px;
+  padding: 10px 8px 10px;
 }
 
 .cart-button {
-  min-height: 38px;
+  min-height: 34px;
   padding-right: 8px;
   padding-left: 8px;
   letter-spacing: 0.1em;
@@ -1952,6 +1951,29 @@ body.nav-open .main-nav {
   cursor: pointer;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .product-card {
+    backdrop-filter: blur(10px);
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .product-photo {
+    filter: saturate(90%) contrast(106%) brightness(94%);
+    transition: transform 0.7s ease;
+  }
+
+  .product-card:hover .product-photo {
+    transform: scale(1.03);
+  }
+}
+
 .product-card:focus-visible {
   outline: 2px solid rgba(241, 238, 232, 0.45);
   outline-offset: 2px;
@@ -2009,12 +2031,10 @@ body.nav-open .main-nav {
 .reel-card {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 1 / 1;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   background: #101010;
-  content-visibility: auto;
-  contain-intrinsic-size: 320px;
 }
 
 .reel-video {
@@ -2111,8 +2131,10 @@ body.nav-open .main-nav {
 .product-detail-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  max-height: min(52vh, 420px);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  object-position: center 22%;
   background: #101010;
 }
 
