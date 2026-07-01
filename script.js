@@ -121,6 +121,7 @@ function renderProductCard(product) {
       data-product-name="${product.name}"
       data-product-price="${product.price}"
       data-product-category="${product.category}"
+      data-accent-color="${product.accentColor}"
       tabindex="0"
       role="button"
       aria-label="Ver ${product.name}"
@@ -518,35 +519,52 @@ function filterCategory(category) {
 
 function initAmbientBackground() {
   const ambientTargets = document.querySelectorAll(
-    "section[data-accent-color], .gateway-card[data-accent-color], .editorial[data-accent-color]"
+    "section[data-accent-color], .gateway-card[data-accent-color], .editorial[data-accent-color], .product-card[data-accent-color]"
   );
   if (!("IntersectionObserver" in window) || !ambientTargets.length) return;
 
   let activeColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim();
   let frame = null;
   let lastChange = 0;
+  const visible = new Map();
+  const throttleMs = window.matchMedia("(hover: none)").matches ? 420 : 260;
+
+  const applyAmbient = (target) => {
+    const nextColor = target?.dataset.accentColor;
+    if (!nextColor || nextColor === activeColor) return;
+
+    const now = performance.now();
+    if (now - lastChange < throttleMs) return;
+    lastChange = now;
+
+    if (frame) window.cancelAnimationFrame(frame);
+    frame = window.requestAnimationFrame(() => {
+      activeColor = nextColor;
+      document.documentElement.style.setProperty("--accent-color", nextColor);
+    });
+  };
 
   const ambientObserver = new IntersectionObserver(
     (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (!visible.length) return;
-
-      const nextColor = visible[0].target.dataset.accentColor;
-      if (!nextColor || nextColor === activeColor) return;
-
-      const now = performance.now();
-      if (now - lastChange < 280) return;
-      lastChange = now;
-
-      if (frame) window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        activeColor = nextColor;
-        document.documentElement.style.setProperty("--accent-color", nextColor);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.set(entry.target, entry.intersectionRatio);
+        else visible.delete(entry.target);
       });
+
+      if (!visible.size) return;
+
+      let bestTarget = null;
+      let bestRatio = -1;
+      visible.forEach((ratio, target) => {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestTarget = target;
+        }
+      });
+
+      applyAmbient(bestTarget);
     },
-    { threshold: [0.35, 0.55], rootMargin: "-22% 0px -22% 0px" }
+    { threshold: [0, 0.2, 0.4, 0.6, 0.8], rootMargin: "-30% 0px -30% 0px" }
   );
 
   ambientTargets.forEach((target) => ambientObserver.observe(target));
