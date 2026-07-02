@@ -113,8 +113,7 @@ function freeShippingHint(subtotal) {
   return `Agrega ${formatPrice(remaining)} más para envío gratis.`;
 }
 
-function renderProductCard(product, index = 0) {
-  const eager = index < 2;
+function renderProductCard(product) {
   return `
     <article
       class="product-card"
@@ -127,19 +126,20 @@ function renderProductCard(product, index = 0) {
       role="button"
       aria-label="Ver ${product.name}"
     >
-      <button class="favorite-button" type="button" aria-label="Guardar ${product.name}" aria-pressed="false">
-        <span aria-hidden="true">&#9825;</span>
-      </button>
-      <img
-        class="product-photo"
-        src="${eager ? product.image : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}"
-        ${eager ? "" : `data-src="${product.image}"`}
-        alt="${product.alt}"
-        width="400"
-        height="533"
-        ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}
-        decoding="async"
-      />
+      <div class="product-media">
+        <button class="favorite-button" type="button" aria-label="Guardar ${product.name}" aria-pressed="false">
+          <span aria-hidden="true">&#9825;</span>
+        </button>
+        <img
+          class="product-photo"
+          src="${product.image}"
+          alt="${product.alt}"
+          width="400"
+          height="533"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div class="product-info">
         <h3>${product.name}</h3>
         <p class="product-price">${formatPrice(product.price)}</p>
@@ -154,49 +154,18 @@ function renderProductGrids() {
 
   if (fitProductGrid) {
     const fitItems = products.filter((product) => product.category === "Fit");
-    fitProductGrid.innerHTML = fitItems.map((product, index) => renderProductCard(product, index)).join("");
+    fitProductGrid.innerHTML = fitItems.map((product) => renderProductCard(product)).join("");
   }
 
   if (casualProductGrid) {
     const casualItems = products.filter((product) => product.category === "Casual");
-    casualProductGrid.innerHTML = casualItems
-      .map((product, index) => renderProductCard(product, index))
-      .join("");
+    casualProductGrid.innerHTML = casualItems.map((product) => renderProductCard(product)).join("");
   }
 
   productCards = [...document.querySelectorAll(".product-card")];
   products.forEach((product) => {
     product.card = productCards.find((card) => card.dataset.productId === product.id) || null;
   });
-  initDeferredProductImages();
-}
-
-function initDeferredProductImages() {
-  const pending = document.querySelectorAll(".product-photo[data-src]");
-  if (!pending.length) return;
-
-  if (!("IntersectionObserver" in window)) {
-    pending.forEach((img) => {
-      img.src = img.dataset.src;
-      img.removeAttribute("data-src");
-    });
-    return;
-  }
-
-  const imageObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute("data-src");
-        observer.unobserve(img);
-      });
-    },
-    { rootMargin: "280px 0px 280px 0px", threshold: 0.01 }
-  );
-
-  pending.forEach((img) => imageObserver.observe(img));
 }
 
 function renderReels() {
