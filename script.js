@@ -113,7 +113,8 @@ function freeShippingHint(subtotal) {
   return `Agrega ${formatPrice(remaining)} más para envío gratis.`;
 }
 
-function renderProductCard(product) {
+function renderProductCard(product, index = 0) {
+  const eager = index < 2;
   return `
     <article
       class="product-card"
@@ -131,13 +132,13 @@ function renderProductCard(product) {
       </button>
       <img
         class="product-photo"
-        src="${product.image}"
+        src="${eager ? product.image : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"}"
+        ${eager ? "" : `data-src="${product.image}"`}
         alt="${product.alt}"
         width="400"
-        height="400"
-        loading="lazy"
+        height="533"
+        ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}
         decoding="async"
-        fetchpriority="low"
       />
       <div class="product-info">
         <h3>${product.name}</h3>
@@ -153,18 +154,49 @@ function renderProductGrids() {
 
   if (fitProductGrid) {
     const fitItems = products.filter((product) => product.category === "Fit");
-    fitProductGrid.innerHTML = fitItems.map((product) => renderProductCard(product)).join("");
+    fitProductGrid.innerHTML = fitItems.map((product, index) => renderProductCard(product, index)).join("");
   }
 
   if (casualProductGrid) {
     const casualItems = products.filter((product) => product.category === "Casual");
-    casualProductGrid.innerHTML = casualItems.map((product) => renderProductCard(product)).join("");
+    casualProductGrid.innerHTML = casualItems
+      .map((product, index) => renderProductCard(product, index))
+      .join("");
   }
 
   productCards = [...document.querySelectorAll(".product-card")];
   products.forEach((product) => {
     product.card = productCards.find((card) => card.dataset.productId === product.id) || null;
   });
+  initDeferredProductImages();
+}
+
+function initDeferredProductImages() {
+  const pending = document.querySelectorAll(".product-photo[data-src]");
+  if (!pending.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    pending.forEach((img) => {
+      img.src = img.dataset.src;
+      img.removeAttribute("data-src");
+    });
+    return;
+  }
+
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.removeAttribute("data-src");
+        observer.unobserve(img);
+      });
+    },
+    { rootMargin: "280px 0px 280px 0px", threshold: 0.01 }
+  );
+
+  pending.forEach((img) => imageObserver.observe(img));
 }
 
 function renderReels() {
@@ -518,16 +550,18 @@ function filterCategory(category) {
 }
 
 function initAmbientBackground() {
-  const ambientTargets = document.querySelectorAll(
-    "section[data-accent-color], .gateway-card[data-accent-color], .editorial[data-accent-color], .product-card[data-accent-color]"
-  );
-  if (!("IntersectionObserver" in window) || !ambientTargets.length) return;
+  const ambientTargets = [
+    ...document.querySelectorAll(
+      "section[data-accent-color], .gateway-card[data-accent-color], .editorial[data-accent-color], .reels[data-accent-color], .product-card[data-accent-color]"
+    ),
+  ];
+  if (!ambientTargets.length) return;
 
   let activeColor = getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim();
-  let frame = null;
   let lastChange = 0;
-  const visible = new Map();
-  const throttleMs = window.matchMedia("(hover: none)").matches ? 420 : 260;
+  let scrollTick = false;
+  const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  const throttleMs = isTouch ? 480 : 280;
 
   const applyAmbient = (target) => {
     const nextColor = target?.dataset.accentColor;
@@ -536,14 +570,52 @@ function initAmbientBackground() {
     const now = performance.now();
     if (now - lastChange < throttleMs) return;
     lastChange = now;
-
-    if (frame) window.cancelAnimationFrame(frame);
-    frame = window.requestAnimationFrame(() => {
-      activeColor = nextColor;
-      document.documentElement.style.setProperty("--accent-color", nextColor);
-    });
+    activeColor = nextColor;
+    document.documentElement.style.setProperty("--accent-color", nextColor);
   };
 
+  const pickCenterTarget = () => {
+    const focusLine = window.innerHeight * 0.42;
+    let bestTarget = null;
+    let bestDistance = Infinity;
+
+    ambientTargets.forEach((target) => {
+      const rect = target.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - focusLine);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestTarget = target;
+      }
+    });
+
+    applyAmbient(bestTarget);
+  };
+
+  if (isTouch) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (scrollTick) return;
+        scrollTick = true;
+        requestAnimationFrame(() => {
+          scrollTick = false;
+          pickCenterTarget();
+        });
+      },
+      { passive: true }
+    );
+    pickCenterTarget();
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    pickCenterTarget();
+    return;
+  }
+
+  const visible = new Map();
   const ambientObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -564,7 +636,7 @@ function initAmbientBackground() {
 
       applyAmbient(bestTarget);
     },
-    { threshold: [0, 0.2, 0.4, 0.6, 0.8], rootMargin: "-30% 0px -30% 0px" }
+    { threshold: [0, 0.25, 0.5, 0.75], rootMargin: "-28% 0px -28% 0px" }
   );
 
   ambientTargets.forEach((target) => ambientObserver.observe(target));
