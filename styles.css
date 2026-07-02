@@ -614,15 +614,25 @@ body.nav-open .menu-toggle span:last-child {
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
     var(--panel);
+  backdrop-filter: blur(10px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
   transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .product-card:hover {
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  transform: translateY(-4px);
+}
+
+.product-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #101010;
 }
 
 .favorite-button {
@@ -637,6 +647,7 @@ body.nav-open .menu-toggle span:last-child {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   background: rgba(11, 11, 11, 0.42);
+  backdrop-filter: blur(10px);
 }
 
 .favorite-button svg {
@@ -657,13 +668,16 @@ body.nav-open .menu-toggle span:last-child {
 .product-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   object-fit: cover;
+  object-position: center center;
   background: #101010;
+  filter: saturate(90%) contrast(106%) brightness(94%);
+  transition: transform 0.7s ease;
 }
 
 .product-card:hover .product-photo {
-  transform: none;
+  transform: scale(1.03);
 }
 
 .photo-top.is-loaded {
@@ -739,6 +753,7 @@ body.nav-open .menu-toggle span:last-child {
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.35;
+  text-transform: uppercase;
 }
 
 .product-price {
@@ -1545,12 +1560,27 @@ body.nav-open .main-nav {
     backdrop-filter: none;
   }
 
-  .product-photo {
-    filter: none;
+  .product-card {
+    backdrop-filter: none;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+    transform: none !important;
   }
 
-  .product-card {
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  .product-card:hover {
+    transform: none;
+  }
+
+  .product-photo {
+    filter: none;
+    transition: none;
+  }
+
+  .product-card:hover .product-photo {
+    transform: none;
+  }
+
+  .favorite-button {
+    backdrop-filter: none;
   }
 
   .ambient-bg {
@@ -1973,21 +2003,8 @@ body.nav-open .main-nav {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .product-card {
-    backdrop-filter: blur(10px);
-    transition:
-      transform 0.35s ease,
-      border-color 0.35s ease,
-      box-shadow 0.35s ease;
-  }
-
   .product-card:hover {
     transform: translateY(-4px);
-  }
-
-  .product-photo {
-    filter: saturate(90%) contrast(106%) brightness(94%);
-    transition: transform 0.7s ease;
   }
 
   .product-card:hover .product-photo {
